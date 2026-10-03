@@ -412,51 +412,62 @@
         const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzBR4rv-VfQ8a9aR64EqsPvAl7OeIN9KV3dCC3x26YmRQWA2WBwasJf64sZDa_vNTP/exec";
 
         async function handleDriveAccess(event) {
-            event.preventDefault();
+    event.preventDefault();
 
-            const sifreInput = document.getElementById('accessPassword');
-            const submitBtn = document.getElementById('submitBtn');
-            const btnText = document.getElementById('btnText');
-            const statusMsg = document.getElementById('driveStatusMessage');
-            const sifre = sifreInput.value.trim();
+    const sifreInput = document.getElementById('accessPassword');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const statusMsg = document.getElementById('driveStatusMessage');
+    const sifre = sifreInput.value.trim();
 
-            if (!sifre) {
-                statusMsg.textContent = "Lütfen bir şifre girin.";
-                statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
-                statusMsg.classList.remove('hidden');
-                return;
+    if (!sifre) {
+        statusMsg.textContent = "Lütfen bir şifre girin.";
+        statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
+        statusMsg.classList.remove('hidden');
+        return;
+    }
+
+    // Tıklama anında sekmeyi hemen aç (Pop-up blocker'a takılmaz)
+    const newTab = window.open('about:blank', '_blank');
+
+    submitBtn.disabled = true;
+    btnText.textContent = "Kontrol ediliyor...";
+    statusMsg.textContent = "Şifre doğrulanıyor...";
+    statusMsg.className = "text-xs text-slate-500 mt-3 min-h-[18px]";
+    statusMsg.classList.remove('hidden');
+
+    try {
+        const response = await fetch(`${APPS_SCRIPT_URL}?sifre=${encodeURIComponent(sifre)}`);
+        const data = await response.json();
+
+        if (data.status === "success" && data.url) {
+            statusMsg.textContent = "✓ Şifre doğru! Klasör açılıyor...";
+            statusMsg.className = "text-xs text-emerald-600 font-bold mt-3 min-h-[18px]";
+            sifreInput.value = "";
+            
+            // Açılan sekmeyi Drive klasörüne yönlendir
+            if (newTab) {
+                newTab.location.href = data.url;
+            } else {
+                window.location.href = data.url;
             }
-
-            submitBtn.disabled = true;
-            btnText.textContent = "Kontrol ediliyor...";
-            statusMsg.textContent = "Şifre doğrulanıyor...";
-            statusMsg.className = "text-xs text-slate-500 mt-3 min-h-[18px]";
-            statusMsg.classList.remove('hidden');
-
-            try {
-                const response = await fetch(`${APPS_SCRIPT_URL}?sifre=${encodeURIComponent(sifre)}`);
-                const data = await response.json();
-
-                if (data.status === "success" && data.url) {
-                    statusMsg.textContent = "✓ Şifre doğru! Klasör yeni sekmede açılıyor...";
-                    statusMsg.className = "text-xs text-emerald-600 font-bold mt-3 min-h-[18px]";
-                    sifreInput.value = "";
-                    window.open(data.url, "_blank");
-                } else {
-                    statusMsg.textContent = "Hatalı şifre girdiniz. Lütfen tekrar deneyin.";
-                    statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
-                    sifreInput.value = "";
-                    sifreInput.focus();
-                }
-            } catch (error) {
-                console.error("Hata:", error);
-                statusMsg.textContent = "Bağlantı hatası oluştu. Lütfen tekrar deneyin.";
-                statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
-            } finally {
-                submitBtn.disabled = false;
-                btnText.textContent = "Klasörü Aç";
-            }
+        } else {
+            if (newTab) newTab.close(); // Hatalıysa açılan boş sekmeyi kapat
+            statusMsg.textContent = "Hatalı şifre girdiniz. Lütfen tekrar deneyin.";
+            statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
+            sifreInput.value = "";
+            sifreInput.focus();
         }
+    } catch (error) {
+        if (newTab) newTab.close();
+        console.error("Hata:", error);
+        statusMsg.textContent = "Bağlantı hatası oluştu. Lütfen tekrar deneyin.";
+        statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
+    } finally {
+        submitBtn.disabled = false;
+        btnText.textContent = "Klasörü Aç";
+    }
+}
     </script>
 
     <!-- SAYI UZAYI CANLI SİMÜLASYON MOTORU (STABİL, KİLİTLENMESİZ & AKICI) -->
