@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7/D Kitap Okuma Formu | Matematik Sokağı</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="h-full m-0 p-0 flex flex-col bg-slate-900 overflow-hidden">
+
+    <!-- Üst Kontrol Çubuğu (Navbar) -->
+    <header class="h-14 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 sm:px-6 flex items-center justify-between shrink-0 z-20">
+        <div class="flex items-center gap-3">
+            <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span>Ana Sayfaya Dön</span>
+            </a>
+            <div class="h-4 w-px bg-slate-200 hidden sm:block"></div>
+            <div class="flex items-center gap-2">
+                <i data-lucide="book-open" class="w-4 h-4 text-purple-600"></i>
+                <span class="text-xs sm:text-sm font-bold text-slate-900">7/D Kitap Okuma Formu</span>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <a href="index.html" class="text-xs text-slate-500 hover:text-slate-800 font-medium hidden sm:inline">
+                Matematik Sokağı
+            </a>
+        </div>
+    </header>
+
+    <!-- Tam Ekran İframe Alanı (Kendi Domaininiz Altında Kalır) -->
+    <main class="flex-1 w-full h-full relative bg-slate-100">
+        <iframe 
+            src="https://script.google.com/macros/s/AKfycbw-RFmmrkBjTzpmSyLk0gyCvW9ZBgL3Di2XHIkM_ZI0zCQqioLmacO-2b3OqXZX-SeNRQ/exec" 
+            class="w-full h-full border-0 absolute inset-0"
+            allow="fullscreen"
+            loading="lazy">
+        </iframe>
+    </main>
+
+    <!-- Lucide İkonları Başlat -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

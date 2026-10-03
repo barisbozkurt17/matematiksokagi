@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="tr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonsuz XOX (Kaybolan Taşlar) | Matematik Sokağı</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-full flex flex-col select-none">
+
+    <!-- Üst Bar -->
+    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 sm:px-6 h-16 flex items-center justify-between shrink-0 sticky top-0 z-30">
+        <div class="flex items-center gap-3">
+            <a href="../index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">Ana Sayfa</span>
+            </a>
+            <div class="h-4 w-px bg-slate-200"></div>
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-cyan-50 text-cyan-600 flex items-center justify-center font-bold">
+                    <i data-lucide="grid-3x3" class="w-4 h-4"></i>
+                </div>
+                <h1 class="text-sm sm:text-base font-extrabold text-slate-900">Sonsuz XOX (Kaybolan Hamleler)</h1>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button id="reset-btn" onclick="resetGame()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-extrabold flex items-center gap-1.5 shadow-sm transition-all active:scale-95 cursor-pointer">
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                <span>Yeniden Başlat</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Ana Oyun Alanı -->
+    <main class="flex-1 max-w-xl w-full mx-auto p-4 sm:p-6 flex flex-col justify-center items-center">
+
+        <!-- Sıra & Bilgilendirme Paneli -->
+        <div class="w-full bg-white rounded-3xl p-4 sm:p-5 shadow-sm border border-slate-200/90 mb-5">
+            <div class="flex items-center justify-between gap-3">
+                <!-- X Oyuncusu -->
+                <div id="pXCard" class="flex-1 p-3.5 rounded-2xl bg-indigo-50 border-2 border-indigo-600 shadow-sm transition-all text-center">
+                    <div class="flex items-center justify-center gap-1.5">
+                        <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-ping"></span>
+                        <span class="text-xs font-black text-indigo-700 uppercase tracking-wider">Oyuncu X</span>
+                    </div>
+                    <span class="text-xl sm:text-2xl font-black text-indigo-700 block mt-0.5">X</span>
+                </div>
+
+                <!-- Kural Özeti -->
+                <div class="px-2 text-center shrink-0">
+                    <div class="inline-flex items-center gap-1 text-[11px] font-bold text-amber-700 bg-amber-50 border border-amber-200/80 px-2.5 py-1 rounded-full">
+                        <i data-lucide="sparkles" class="w-3 h-3 text-amber-500"></i>
+                        <span>En fazla 3 taş!</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-1 max-w-[120px] leading-tight">4. taş konunca en eski taş silinir.</p>
+                </div>
+
+                <!-- O Oyuncusu -->
+                <div id="pOCard" class="flex-1 p-3.5 rounded-2xl bg-slate-50 border-2 border-transparent transition-all opacity-60 text-center">
+                    <div class="flex items-center justify-center gap-1.5">
+                        <span class="text-xs font-black text-rose-700 uppercase tracking-wider">Oyuncu O</span>
+                    </div>
+                    <span class="text-xl sm:text-2xl font-black text-rose-600 block mt-0.5">O</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3x3 XOX Tahtası -->
+        <div class="bg-white rounded-3xl p-4 sm:p-6 shadow-sm border border-slate-200/90 w-full flex flex-col items-center">
+            <div class="grid grid-cols-3 gap-2.5 sm:gap-3.5 w-full max-w-[340px] aspect-square">
+                <button class="box aspect-square rounded-2xl bg-slate-50 border-2 border-slate-200 hover:border-slate-300 font-black text-4xl sm:text-5xl flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer"></button>
+                <button class="box aspect-square rounded-2xl bg-slate-50 border-2 border-slate-200 hover:border-slate-300 font-black text-4xl sm:text-5xl flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer"></button>
+                <button class="box aspect-square rounded-2xl bg-slate-50 border-2 border-slate-200 hover:border-slate-300 font-black text-4xl sm:text-5xl flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer"></button>
+                <button class="box aspect-square rounded-2xl bg-slate-50 border-2 border-slate-200 hover:border-slate-300 font-black text-4xl sm:text-5xl flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer"></button>
+                <button class="box aspect-square rounded-2xl bg-slate-50 border-2 border-slate-200 hover:border-slate-300 font-black text-4xl sm:text-5xl flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer"></button>
+                <button class="box aspect-square rounded-2xl bg-slate-50 border-2 border-slate-200 hover:border-slate-300 font-black text-4xl sm:text-5xl flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer"></button>
+                <button class="box aspect-square rounded-2xl bg-slate-50 border-2 border-slate-200 hover:border-slate-300 font-black text-4xl sm:text-5xl flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer"></button>
+                <button class="box aspect-square rounded-2xl bg-slate-50 border-2 border-slate-200 hover:border-slate-300 font-black text-4xl sm:text-5xl flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer"></button>
+                <button class="box aspect-square rounded-2xl bg-slate-50 border-2 border-slate-200 hover:border-slate-300 font-black text-4xl sm:text-5xl flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer"></button>
+            </div>
+            
+            <div class="mt-5 flex items-center justify-center gap-4 text-xs font-semibold text-slate-400">
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-slate-800 inline-block"></span> Yeni Taş</span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-slate-400 inline-block"></span> Orta Taş</span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-slate-200 border border-slate-300 inline-block"></span> Silinecek Taş</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Kazanan Modalı -->
+    <div id="modalWinner" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
+            <div id="winnerIcon" class="w-16 h-16 rounded-2xl mx-auto flex items-center justify-center mb-4 bg-emerald-100 text-emerald-600">
+                <i data-lucide="trophy" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-black text-slate-900">Tebrikler!</h3>
+            <p id="msg" class="text-sm font-bold text-slate-600 mt-2 mb-6">Kazanan: Oyuncu X</p>
+            <button id="new-btn" onclick="resetGame()" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-sm transition-colors cursor-pointer shadow-md shadow-brand-500/25">
+                Yeni Oyun
+            </button>
+        </div>
+    </div>
+
+    <!-- Lucide İkonları Başlat -->
+    <script>
+        lucide.createIcons();
+
+        let boxes = document.querySelectorAll(".box");
+        let modalWinner = document.querySelector("#modalWinner");
+        let msg = document.querySelector("#msg");
+        let winnerIcon = document.querySelector("#winnerIcon");
+
+        let turnO = false; // false = X, true = O
+        let gameOver = false;
+
+        const winPatterns = [
+            [0, 1, 2],
+            [0, 3, 6],
+            [0, 4, 8],
+            [1, 4, 7],
+            [2, 5, 8],
+            [2, 4, 6],
+            [3, 4, 5],
+            [6, 7, 8],
+        ];
+
+        function siraGuncelle() {
+            const pXCard = document.getElementById("pXCard");
+            const pOCard = document.getElementById("pOCard");
+
+            if (!turnO) {
+                // Sıra X'te
+                pXCard.className = "flex-1 p-3.5 rounded-2xl bg-indigo-50 border-2 border-indigo-600 shadow-sm transition-all text-center";
+                pOCard.className = "flex-1 p-3.5 rounded-2xl bg-slate-50 border-2 border-transparent transition-all opacity-60 text-center";
+                pXCard.querySelector("span:first-child").className = "w-2.5 h-2.5 rounded-full bg-indigo-600 animate-ping";
+            } else {
+                // Sıra O'da
+                pOCard.className = "flex-1 p-3.5 rounded-2xl bg-rose-50 border-2 border-rose-600 shadow-sm transition-all text-center";
+                pXCard.className = "flex-1 p-3.5 rounded-2xl bg-slate-50 border-2 border-transparent transition-all opacity-60 text-center";
+            }
+        }
+
+        // Yaşa göre stil sınıfları (Yeni -> Orta -> Silinmek üzere olan soluk taş)
+        function renderBoxStyles(box) {
+            const base = "box aspect-square rounded-2xl font-black text-4xl sm:text-5xl flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer ";
+            
+            // X Taşları
+            if (box.dataset.stage === "pX1") {
+                box.className = base + "bg-indigo-600 text-white border-2 border-indigo-700 shadow-md";
+            } else if (box.dataset.stage === "pX2") {
+                box.className = base + "bg-indigo-100 text-indigo-700 border-2 border-indigo-300";
+            } else if (box.dataset.stage === "pX3") {
+                box.className = base + "bg-slate-100 text-indigo-300 border-2 border-dashed border-indigo-200 opacity-60"; // Silinmek üzere
+            } 
+            // O Taşları
+            else if (box.dataset.stage === "pO1") {
+                box.className = base + "bg-rose-600 text-white border-2 border-rose-700 shadow-md";
+            } else if (box.dataset.stage === "pO2") {
+                box.className = base + "bg-rose-100 text-rose-700 border-2 border-rose-300";
+            } else if (box.dataset.stage === "pO3") {
+                box.className = base + "bg-slate-100 text-rose-300 border-2 border-dashed border-rose-200 opacity-60"; // Silinmek üzere
+            } 
+            // Boş
+            else {
+                box.className = base + "bg-slate-50 text-slate-800 border-2 border-slate-200 hover:border-slate-300";
+            }
+        }
+
+        boxes.forEach((box) => {
+            box.addEventListener("click", () => {
+                if (gameOver || box.innerText !== "") return;
+
+                if (turnO) {
+                    // Player O
+                    boxes.forEach((b) => {
+                        if (b.dataset.stage === "pO1") {
+                            b.dataset.stage = "pO2";
+                        } else if (b.dataset.stage === "pO2") {
+                            b.dataset.stage = "pO3";
+                        } else if (b.dataset.stage === "pO3") {
+                            delete b.dataset.stage;
+                            b.innerText = "";
+                            b.disabled = false;
+                        }
+                        renderBoxStyles(b);
+                    });
+
+                    box.dataset.stage = "pO1";
+                    box.innerText = "O";
+                    renderBoxStyles(box);
+                    box.disabled = true;
+
+                    if (checkWinner()) return;
+
+                    turnO = false;
+                    siraGuncelle();
+
+                } else {
+                    // Player X
+                    boxes.forEach((b) => {
+                        if (b.dataset.stage === "pX1") {
+                            b.dataset.stage = "pX2";
+                        } else if (b.dataset.stage === "pX2") {
+                            b.dataset.stage = "pX3";
+                        } else if (b.dataset.stage === "pX3") {
+                            delete b.dataset.stage;
+                            b.innerText = "";
+                            b.disabled = false;
+                        }
+                        renderBoxStyles(b);
+                    });
+
+                    box.dataset.stage = "pX1";
+                    box.innerText = "X";
+                    renderBoxStyles(box);
+                    box.disabled = true;
+
+                    if (checkWinner()) return;
+
+                    turnO = true;
+                    siraGuncelle();
+                }
+            });
+        });
+
+        const showWinner = (winner) => {
+            gameOver = true;
+            msg.innerText = `Tebrikler! ${winner === "X" ? "Oyuncu X (Mavi)" : "Oyuncu O (Kırmızı)"} Kazandı!`;
+
+            if (winner === "X") {
+                winnerIcon.className = "w-16 h-16 rounded-2xl mx-auto flex items-center justify-center mb-4 bg-indigo-100 text-indigo-600";
+            } else {
+                winnerIcon.className = "w-16 h-16 rounded-2xl mx-auto flex items-center justify-center mb-4 bg-rose-100 text-rose-600";
+            }
+
+            modalWinner.classList.remove("hidden");
+        };
+
+        const checkWinner = () => {
+            for (let pattern of winPatterns) {
+                let pos1Val = boxes[pattern[0]].innerText;
+                let pos2Val = boxes[pattern[1]].innerText;
+                let pos3Val = boxes[pattern[2]].innerText;
+
+                if (pos1Val !== "" && pos2Val !== "" && pos3Val !== "") {
+                    if (pos1Val === pos2Val && pos2Val === pos3Val) {
+                        // Kazanan hattı vurgula
+                        pattern.forEach(idx => {
+                            boxes[idx].classList.add("ring-4", "ring-emerald-400", "scale-105");
+                        });
+                        showWinner(pos1Val);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        };
+
+        const resetGame = () => {
+            turnO = false;
+            gameOver = false;
+            modalWinner.classList.add("hidden");
+
+            boxes.forEach((box) => {
+                box.disabled = false;
+                box.innerText = "";
+                delete box.dataset.stage;
+                box.classList.remove("ring-4", "ring-emerald-400", "scale-105");
+                renderBoxStyles(box);
+            });
+
+            siraGuncelle();
+        };
+
+        // Başlangıç
+        siraGuncelle();
+    </script>
+</body>
+</html>

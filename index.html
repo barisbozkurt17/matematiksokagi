@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matematik Sokağı | Barış Bozkurt</title>
+    <!-- Tailwind CSS (v3 CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                            950: '#1e1b4b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100/80 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+
+    <!-- 1. ÜST NAVİGASYON (HEADER) -->
+    <header class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <!-- Logo & İsim -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+                    <i data-lucide="calculator" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <span class="text-base sm:text-lg font-bold text-white tracking-tight block leading-tight">Matematik Sokağı</span>
+                    <span class="text-xs text-slate-400 font-medium block">Barış Bozkurt</span>
+                </div>
+            </a>
+
+            <!-- Menü Linkleri (Desktop) -->
+            <nav class="hidden md:flex items-center gap-1.5">
+                <a href="#oyunlar" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+                    Matematik Oyunları
+                </a>
+                <a href="#takip" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+                    Ödev & Formlar
+                </a>
+                <a href="#materyaller" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+                    Sınıf Materyalleri
+                </a>
+            </nav>
+
+            <!-- Kilitli Giriş Butonu -->
+            <div class="flex items-center gap-2">
+                <a href="#materyaller" class="inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white transition-all shadow-sm shadow-brand-500/30">
+                    <i data-lucide="folder-key" class="w-4 h-4"></i>
+                    <span>Materyal Girişi</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ANA İÇERİK -->
+    <main class="flex-1 pb-16">
+
+        <!-- 2. KOYU HERO / KARŞILAMA BÖLÜMÜ -->
+        <section class="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white overflow-hidden border-b border-slate-800/80">
+            <!-- Arka Plan Işık Efekti -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-gradient-to-r from-brand-600 via-indigo-500 to-purple-600 blur-[150px] rounded-full"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-4 text-center relative z-10 flex flex-col items-center my-auto">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-brand-500/10 text-brand-300 border border-brand-500/30 mb-6 backdrop-blur-md">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-brand-400"></i>
+                    <span>Eğlenceli Ders ve Etkileşim Portalı</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.1] text-white">
+                    Matematik Sokağı'na <br class="hidden sm:inline">Hoş Geldiniz
+                </h1>
+                
+                <p class="mt-5 text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
+                    Hemen bir matematik oyunuyla hız kazanın, haftalık ödev takiplerine göz atın veya şifrenizle sınıf Drive arşivinize erişin.
+                </p>
+
+                <div class="mt-8 flex flex-wrap items-center justify-center gap-3.5">
+                    <a href="#oyunlar" class="px-7 py-3.5 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-sm sm:text-base shadow-xl shadow-brand-500/30 transition-all flex items-center gap-2.5 hover:-translate-y-1">
+                        <i data-lucide="gamepad-2" class="w-5 h-5"></i> Oyun Odasına Git
+                    </a>
+                    <a href="#materyaller" class="px-7 py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white border border-white/20 font-extrabold text-sm sm:text-base backdrop-blur-md transition-all flex items-center gap-2.5 hover:-translate-y-1">
+                        <i data-lucide="folder-key" class="w-5 h-5 text-brand-300"></i> Drive Materyalleri
+                    </a>
+                </div>
+            </div>
+
+            <!-- Aşağı Kaydır İpucu İkonu -->
+            <a href="#oyunlar" class="relative z-10 mt-auto pt-6 flex flex-col items-center gap-1.5 text-slate-400 hover:text-white transition-colors group cursor-pointer">
+                <span class="text-[11px] font-bold tracking-widest uppercase opacity-70 group-hover:opacity-100">Aşağı Kaydır</span>
+                <i data-lucide="chevron-down" class="w-5 h-5 animate-bounce"></i>
+            </a>
+        </section>
+
+        <!-- GRUPLANMIŞ BÖLÜMLER ALANI -->
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-12 relative z-20">
+
+            <!-- 1. GRUP: EĞİTSEL MATEMATİK OYUNLARI -->
+            <section id="oyunlar" class="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm">
+                <!-- Grup Başlığı -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-slate-100 gap-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-xs">
+                            <i data-lucide="gamepad-2" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">Matematik Oyun Odası</h2>
+                                <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Aktif</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-0.5">Akıllı tahta ve mobil cihazlarla tam uyumlu eğitsel matematik oyunları</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-400 self-start sm:self-center">6 Oyun</span>
+                </div>
+
+                <!-- Oyun Kartları -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Oyun 1: Çarpım Tablosu -->
+                    <div class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-brand-300 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded">Ezber & Pratik</span>
+                                <span class="text-[11px] text-slate-400">Bireysel</span>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-brand-600 transition-colors">Çarpım Tablosu</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Adım adım çarpım tablosunu öğrenin, eksik olduğunuz sayıları test edin.
+                            </p>
+                        </div>
+                        <a href="oyunlar/carpim-tablosu.html" class="mt-5 w-full py-2.5 px-3 rounded-xl bg-slate-900 group-hover:bg-brand-600 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors">
+                            <i data-lucide="play" class="w-3.5 h-3.5"></i> Başla
+                        </a>
+                    </div>
+
+                    <!-- Oyun 2: Çarpım Savaşları -->
+                    <div class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-rose-300 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded">Strateji</span>
+                                <span class="text-[11px] text-slate-400">2 Oyuncu</span>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-rose-600 transition-colors">Çarpım Savaşları</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Çarpanları akıllıca seçip 3'lü dizilimi tamamlayarak tahtayı ele geçirin.
+                            </p>
+                        </div>
+                        <a href="oyunlar/carpim-savaslari.html" class="mt-5 w-full py-2.5 px-3 rounded-xl bg-slate-900 group-hover:bg-rose-600 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors">
+                            <i data-lucide="play" class="w-3.5 h-3.5"></i> Başla
+                        </a>
+                    </div>
+
+                    <!-- Oyun 3: İki Kişilik Çarpma -->
+                    <div class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-amber-300 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">Karşılıklı Düello</span>
+                                <span class="text-[11px] text-slate-400">2 Oyuncu</span>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-amber-600 transition-colors">İki Kişilik Çarpma</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Aynı ekranda karşılıklı yarışarak doğru cevabı ilk basan puanı alır.
+                            </p>
+                        </div>
+                        <a href="oyunlar/iki-kisilik-carpma.html" class="mt-5 w-full py-2.5 px-3 rounded-xl bg-slate-900 group-hover:bg-amber-600 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors">
+                            <i data-lucide="play" class="w-3.5 h-3.5"></i> Başla
+                        </a>
+                    </div>
+
+                    <!-- Oyun 4: Matematik XOX -->
+                    <div class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-cyan-300 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded">Strateji</span>
+                                <span class="text-[11px] text-slate-400">2 Oyuncu</span>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-cyan-600 transition-colors">Matematik XOX</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Hamle yapmak için kutudaki matematik sorusunu doğru yanıtlayın.
+                            </p>
+                        </div>
+                        <a href="oyunlar/xox.html" class="mt-5 w-full py-2.5 px-3 rounded-xl bg-slate-900 group-hover:bg-cyan-600 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors">
+                            <i data-lucide="play" class="w-3.5 h-3.5"></i> Başla
+                        </a>
+                    </div>
+
+                    <!-- Oyun 5: Toplama Alıştırmaları -->
+                    <div class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-indigo-300 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded">Hızlı İşlem</span>
+                                <span class="text-[11px] text-slate-400">10'lu & Serbest</span>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-brand-600 transition-colors">Toplama Alıştırmaları</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                10'a tamamlama ve zihinden hızlı toplama hızlandırma egzersizleri.
+                            </p>
+                        </div>
+                        <a href="oyunlar/toplama.html" class="mt-5 w-full py-2.5 px-3 rounded-xl bg-slate-900 group-hover:bg-brand-600 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors">
+                            <i data-lucide="play" class="w-3.5 h-3.5"></i> Başla
+                        </a>
+                    </div>
+
+                    <!-- Oyun 6: Bölme & Çıkarma -->
+                    <div class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-emerald-300 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Zihinden İşlem</span>
+                                <span class="text-[11px] text-slate-400">Temel Düzey</span>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-emerald-600 transition-colors">Bölme & Çıkarma</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Kalanlı bölme ve zihinden eksiltme pratikleri.
+                            </p>
+                        </div>
+                        <a href="oyunlar/bolme-cikarma.html" class="mt-5 w-full py-2.5 px-3 rounded-xl bg-slate-900 group-hover:bg-emerald-600 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors">
+                            <i data-lucide="play" class="w-3.5 h-3.5"></i> Başla
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. GRUP: ÖDEV & FORMLAR BÖLÜMÜ -->
+            <section id="takip" class="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm">
+                <!-- Grup Başlığı -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-slate-100 gap-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shadow-xs">
+                            <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">Sınıf Takip & Formlar</h2>
+                                <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800">Düzenli Takip</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-0.5">Haftalık ödev kontrol tablosu ve öğrenci kitap okuma formu</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-400 self-start sm:self-center">2 Bağlantı</span>
+                </div>
+
+                <!-- Kartlar -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Ödev Kontrol Listesi -->
+                    <a href="https://docs.google.com/spreadsheets/d/1GcwtImaLIB3Qw36oTzy13Ec-eDRMWDObWSTb6kn9BRY/edit?gid=55073469#gid=55073469" target="_blank" rel="noopener noreferrer"
+                       class="group p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-emerald-400 transition-all shadow-xs flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-xs">
+                                <i data-lucide="check-square" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 class="font-bold text-slate-900 group-hover:text-emerald-700 transition-colors text-sm sm:text-base">Ödev Kontrol Listesi</h3>
+                                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-100/70 text-emerald-800 border border-emerald-200/60">E-Tablo</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-0.5">Haftalık ödev artı/eksi durum tablosu</p>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-400 group-hover:text-emerald-600 transition-colors"></i>
+                    </a>
+
+                    <!-- 7/D Kitap Okuma Formu (Yeni Sayfa) -->
+                    <a href="kitapokuma.html" rel="noopener noreferrer"
+                       class="group p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-purple-400 transition-all shadow-xs flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-xs">
+                                <i data-lucide="book-open" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 class="font-bold text-slate-900 group-hover:text-purple-700 transition-colors text-sm sm:text-base">7/D Kitap Okuma Formu</h3>
+                                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-purple-100/70 text-purple-800 border border-purple-200/60">Form Sayfası</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-0.5">Okunan kitap ve sayfa sayısı bildirim formu</p>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-right" class="w-5 h-5 text-slate-400 group-hover:text-purple-600 transition-colors"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 3. GRUP: DERS MATERYALLERİ (AÇIK TEMA, FERAH VE ŞIK) -->
+            <section id="materyaller" class="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm relative overflow-hidden">
+                <!-- Grup Başlığı -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-slate-100 gap-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center shadow-xs">
+                            <i data-lucide="folder-key" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">Ders Materyalleri & Klasörler</h2>
+                                <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-brand-100 text-brand-800">Şifreli Erişim</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-0.5">Sınıfınıza özel Google Drive arşivine doğrudan bağlantı</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-400 self-start sm:self-center">Google Drive</span>
+                </div>
+
+                <!-- Form Kartı -->
+                <div class="bg-gradient-to-r from-slate-50 via-indigo-50/40 to-slate-50 rounded-2xl p-5 sm:p-7 border border-slate-200/80">
+                    <div class="max-w-xl">
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900">Sınıf Şifresi ile Klasörü Aç</h3>
+                        <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">
+                            Öğretmeniniz tarafından paylaşılan sınıf şifrenizi girerek ilgili ders çalışma kağıtları ve materyallere ulaşabilirsiniz.
+                        </p>
+
+                        <!-- Şifre Giriş Formu -->
+                        <form id="driveAccessForm" onsubmit="handleDriveAccess(event)" class="mt-5 flex flex-col sm:flex-row gap-2.5">
+                            <div class="relative flex-1">
+                                <i data-lucide="key" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                                <input type="password" id="accessPassword" placeholder="Sınıf Şifresi (Örn: 6D)..." autocomplete="off"
+                                       class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-800 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all shadow-xs">
+                            </div>
+                            <button type="submit" id="submitBtn"
+                                    class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm transition-all shadow-md shadow-brand-500/25 flex items-center justify-center gap-2 shrink-0 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
+                                <span id="btnText">Klasörü Aç</span>
+                                <i id="btnIcon" data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+                        <p id="driveStatusMessage" class="text-xs mt-3 min-h-[18px] transition-all hidden"></p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- 4. FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+            <div class="flex items-center gap-2 font-medium">
+                <span class="font-bold text-slate-800">Matematik Sokağı</span>
+                <span>•</span>
+                <span>Barış Bozkurt</span>
+            </div>
+            <div>
+                © 2026 Matematik Sokağı. Tüm hakları saklıdır.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lucide İkonlarını Başlat -->
+    <script>
+        lucide.createIcons();
+
+        // Apps Script Web App URL
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzBR4rv-VfQ8a9aR64EqsPvAl7OeIN9KV3dCC3x26YmRQWA2WBwasJf64sZDa_vNTP/exec";
+
+        async function handleDriveAccess(event) {
+            event.preventDefault();
+
+            const sifreInput = document.getElementById('accessPassword');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const statusMsg = document.getElementById('driveStatusMessage');
+            const sifre = sifreInput.value.trim();
+
+            if (!sifre) {
+                statusMsg.textContent = "Lütfen bir şifre girin.";
+                statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
+                statusMsg.classList.remove('hidden');
+                return;
+            }
+
+            // Yükleniyor durumu
+            submitBtn.disabled = true;
+            btnText.textContent = "Kontrol ediliyor...";
+            statusMsg.textContent = "Şifre doğrulanıyor...";
+            statusMsg.className = "text-xs text-slate-500 mt-3 min-h-[18px]";
+            statusMsg.classList.remove('hidden');
+
+            try {
+                // Apps Script Web App'e JSON isteği at
+                const response = await fetch(`${APPS_SCRIPT_URL}?sifre=${encodeURIComponent(sifre)}`);
+                const data = await response.json();
+
+                if (data.status === "success" && data.url) {
+                    statusMsg.textContent = "✓ Şifre doğru! Klasör yeni sekmede açılıyor...";
+                    statusMsg.className = "text-xs text-emerald-600 font-bold mt-3 min-h-[18px]";
+                    sifreInput.value = "";
+                    window.open(data.url, "_blank");
+                } else {
+                    statusMsg.textContent = "Hatalı şifre girdiniz. Lütfen tekrar deneyin.";
+                    statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
+                    sifreInput.value = "";
+                    sifreInput.focus();
+                }
+            } catch (error) {
+                console.error("Hata:", error);
+                statusMsg.textContent = "Bağlantı hatası oluştu. Lütfen tekrar deneyin.";
+                statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
+            } finally {
+                submitBtn.disabled = false;
+                btnText.textContent = "Klasörü Aç";
+            }
+        }
+    </script>
+</body>
+</html>

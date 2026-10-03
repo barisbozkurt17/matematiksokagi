@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="tr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toplama Alıştırması | Matematik Sokağı</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-full flex flex-col selection:bg-brand-500 selection:text-white">
+
+    <!-- Üst Bar -->
+    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 sm:px-6 h-16 flex items-center justify-between shrink-0 sticky top-0 z-30">
+        <div class="flex items-center gap-3">
+            <a href="../index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">Ana Sayfa</span>
+            </a>
+            <div class="h-4 w-px bg-slate-200"></div>
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                </div>
+                <h1 class="text-sm sm:text-base font-extrabold text-slate-900">Toplama Alıştırması</h1>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <span class="text-xs text-slate-400 font-medium hidden sm:inline">Matematik Sokağı</span>
+        </div>
+    </header>
+
+    <!-- Ana Oyun Alanı -->
+    <main class="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-6 flex flex-col justify-center">
+
+        <!-- Oyun Kontrol ve Bilgi Kartı -->
+        <div class="bg-white rounded-3xl p-5 sm:p-8 shadow-sm border border-slate-200/90 relative overflow-hidden">
+            
+            <!-- Üst Sayaçlar ve Seçim -->
+            <div class="grid grid-cols-3 items-center gap-3 pb-5 border-b border-slate-100">
+                <!-- Süre -->
+                <div class="flex flex-col items-center sm:items-start">
+                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Kalan Süre</span>
+                    <div class="flex items-center gap-1.5 mt-0.5">
+                        <i data-lucide="timer" class="w-4 h-4 text-amber-500"></i>
+                        <span id="kalanSure" class="text-xl sm:text-2xl font-extrabold text-slate-800">60</span>
+                    </div>
+                </div>
+
+                <!-- Mod Seçimi (Dropdown) -->
+                <div class="flex flex-col items-center">
+                    <label for="seviye" class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Düzey</label>
+                    <select id="seviye" class="w-full max-w-[140px] px-2 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all text-center">
+                        <option value="kolay" selected>1 - 10 Arası</option>
+                        <option value="orta">1 - 20 Arası</option>
+                        <option value="onluk">3'lü Onluğa Tamamlama (12+15+18)</option>
+                        <option value="ileri">İki Basamaklı (10-50)</option>
+                    </select>
+                </div>
+
+                <!-- Puan -->
+                <div class="flex flex-col items-center sm:items-end">
+                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Toplam Puan</span>
+                    <div class="flex items-center gap-1.5 mt-0.5">
+                        <i data-lucide="trophy" class="w-4 h-4 text-emerald-500"></i>
+                        <span id="puan" class="text-xl sm:text-2xl font-extrabold text-emerald-600">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 Kademeli İlerleme Çubuğu -->
+            <div class="mt-4">
+                <div class="flex items-center justify-between text-[11px] font-bold text-slate-400 mb-1 px-1">
+                    <span>Seri Bonusu</span>
+                    <span id="komboText" class="text-slate-500 font-semibold">+10 Puan</span>
+                </div>
+                <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                    <div id="loader" class="h-3 rounded-full transition-all duration-300 bg-sky-500" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Soru Alanı -->
+            <div class="py-8 sm:py-10 text-center relative">
+                <div id="soruAlani">
+                    <span class="text-xs font-semibold text-slate-400 uppercase tracking-widest block mb-1">Hesapla</span>
+                    <div id="soru" class="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight font-mono select-none">
+                        ? + ?
+                    </div>
+                </div>
+
+                <!-- Başla Butonu Kaplaması -->
+                <div id="baslaOverlay" class="absolute inset-0 bg-white/95 backdrop-blur-xs flex flex-col items-center justify-center gap-3 z-10">
+                    <div id="sonucMesaji" class="text-center hidden">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Süre Tamamlandı!</span>
+                        <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Skorunuz: <span id="sonPuan" class="text-indigo-600">0</span></p>
+                    </div>
+                    <button id="baslaTusu" onclick="basla()" class="px-8 py-3.5 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-brand-500/30 transition-all hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer">
+                        <i data-lucide="play" class="w-5 h-5 fill-white"></i>
+                        <span id="baslaBtnYazi">Oyuna Başla</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Yan Yana 4 Şık Butonu -->
+            <div class="grid grid-cols-4 gap-2 sm:gap-3">
+                <button id="sA" onclick="kontrolEt('sA')" class="sik-butonu py-4 px-2 sm:py-5 rounded-2xl bg-slate-50 hover:bg-brand-50 hover:border-brand-300 border border-slate-200/90 text-slate-800 text-lg sm:text-2xl font-black transition-all shadow-sm active:scale-95 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 select-none text-center" disabled>-</button>
+                <button id="sB" onclick="kontrolEt('sB')" class="sik-butonu py-4 px-2 sm:py-5 rounded-2xl bg-slate-50 hover:bg-brand-50 hover:border-brand-300 border border-slate-200/90 text-slate-800 text-lg sm:text-2xl font-black transition-all shadow-sm active:scale-95 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 select-none text-center" disabled>-</button>
+                <button id="sC" onclick="kontrolEt('sC')" class="sik-butonu py-4 px-2 sm:py-5 rounded-2xl bg-slate-50 hover:bg-brand-50 hover:border-brand-300 border border-slate-200/90 text-slate-800 text-lg sm:text-2xl font-black transition-all shadow-sm active:scale-95 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 select-none text-center" disabled>-</button>
+                <button id="sD" onclick="kontrolEt('sD')" class="sik-butonu py-4 px-2 sm:py-5 rounded-2xl bg-slate-50 hover:bg-brand-50 hover:border-brand-300 border border-slate-200/90 text-slate-800 text-lg sm:text-2xl font-black transition-all shadow-sm active:scale-95 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 select-none text-center" disabled>-</button>
+            </div>
+
+        </div>
+
+        <!-- Hatalı Sorular Analiz Tablosu -->
+        <div id="analizKutusu" class="mt-6 bg-white rounded-3xl p-5 sm:p-6 border border-slate-200/80 shadow-sm hidden">
+            <div class="flex items-center gap-2 mb-4">
+                <div class="w-7 h-7 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+                    <i data-lucide="alert-circle" class="w-4 h-4"></i>
+                </div>
+                <h3 class="text-sm font-bold text-slate-900">Tekrar Edilmesi Gereken Hatalı Sorular</h3>
+            </div>
+            
+            <div class="overflow-x-auto border border-slate-100 rounded-2xl">
+                <table id="mytable" class="w-full text-left text-xs sm:text-sm">
+                    <thead class="bg-slate-50 border-b border-slate-100 text-slate-500 font-bold">
+                        <tr>
+                            <th class="p-3">Soru</th>
+                            <th class="p-3 text-emerald-600 font-bold">Doğru Cevap</th>
+                            <th class="p-3 text-rose-600 font-bold">İşaretlenen</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body" class="divide-y divide-slate-100"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Lucide İkonları Başlat -->
+    <script>
+        lucide.createIcons();
+
+        var interval = null;
+
+        function rastgeleSayi(rastgele){
+            var arr = [];
+            arr.push(rastgele);
+            while(arr.length < 4){
+                var r = Math.floor(Math.random() * 12) + (rastgele - 6);
+                if(arr.indexOf(r) === -1 && r > 0) arr.push(r);
+                arr.sort(function(a, b){ return a - b; });
+            }
+            return arr;
+        }    
+        
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return array;
+        }
+        
+        function rastgeleSoru(){
+            var seviye = document.getElementById('seviye').value;
+
+            if (seviye === "onluk") {
+                // 3'lü Onluğa Tamamlama Stratejisi (Örn: 12 + 15 + 18)
+                // 1) Birler basamağı 10 eden iki sayı (a ve b)
+                var birler = Math.floor(Math.random() * 9) + 1; // 1 - 9
+                var onlar1 = Math.floor(Math.random() * 4) + 1; // 10, 20, 30, 40
+                var onlar2 = Math.floor(Math.random() * 3) + 1; 
+
+                var a = (onlar1 * 10) + birler;
+                var b = (onlar2 * 10) + (10 - birler); // a + b tam 10'un katı olur!
+
+                // 2) Üçüncü sayı (c)
+                var c = Math.floor(Math.random() * 35) + 5; // 5 - 40 arası
+
+                var sayilar = [a, b, c];
+                shuffleArray(sayilar);
+                return { tip: 3, sayilar: sayilar, sonuc: a + b + c };
+            } else {
+                var sayi1, sayi2;
+                if (seviye === "kolay") {
+                    sayi1 = Math.floor(Math.random() * 10) + 1;
+                    sayi2 = Math.floor(Math.random() * 10) + 1;
+                } else if (seviye === "orta") {
+                    sayi1 = Math.floor(Math.random() * 15) + 5;
+                    sayi2 = Math.floor(Math.random() * 15) + 3;
+                } else {
+                    sayi1 = Math.floor(Math.random() * 40) + 10;
+                    sayi2 = Math.floor(Math.random() * 40) + 10;
+                }
+                var arr = [sayi1, sayi2];
+                shuffleArray(arr);
+                return { tip: 2, sayilar: arr, sonuc: arr[0] + arr[1] };
+            }
+        }
+
+        function kontrolEt(isaret) {
+            var kSure = document.getElementById("kalanSure").textContent;
+            if (kSure == "Süre Bitti" || kSure == "Süre") { return; }
+
+            var soru = document.getElementById("soru").textContent;
+            var parcalar = soru.split(" + ");
+            var sonuc = 0;
+            for (var i = 0; i < parcalar.length; i++) {
+                sonuc += parseInt(parcalar[i]);
+            }
+
+            var isaretlenen = parseInt(document.getElementById(isaret).textContent);
+            var gPuan = parseInt(document.getElementById("puan").textContent);
+            var loader = document.getElementById("loader");
+            var oransabit = loader.style.width;
+            var komboText = document.getElementById("komboText");
+            var tiklananButon = document.getElementById(isaret);
+
+            if (sonuc == isaretlenen && kSure !== "Süre Bitti") {
+                // DOĞRU
+                if (oransabit == "0%") {
+                    loader.style.width = "20%";
+                    loader.className = "h-3 rounded-full transition-all duration-300 bg-sky-500";
+                    komboText.textContent = "+10 Puan";
+                } else if (oransabit == "20%") {
+                    loader.style.width = "40%";
+                    loader.className = "h-3 rounded-full transition-all duration-300 bg-yellow-400";
+                    komboText.textContent = "+10 Puan";
+                } else if (oransabit == "40%") {
+                    loader.style.width = "60%";
+                    loader.className = "h-3 rounded-full transition-all duration-300 bg-amber-500";
+                    komboText.textContent = "+10 Puan";
+                } else if (oransabit == "60%") {
+                    loader.style.width = "80%";
+                    loader.className = "h-3 rounded-full transition-all duration-300 bg-orange-500";
+                    komboText.textContent = "+10 Puan";
+                } else {
+                    loader.style.width = "100%";
+                    loader.className = "h-3 rounded-full transition-all duration-300 bg-rose-600 animate-pulse";
+                    komboText.textContent = "🔥 FULL! +15 Puan Bonusu";
+                }
+
+                if (oransabit == "100%") {
+                    gPuan = gPuan + 15;
+                } else {
+                    gPuan = gPuan + 10;
+                }
+                document.getElementById("puan").innerHTML = gPuan;
+
+                tiklananButon.classList.add("!bg-emerald-500", "!text-white", "!border-emerald-500");
+                setTimeout(function(){
+                    tiklananButon.classList.remove("!bg-emerald-500", "!text-white", "!border-emerald-500");
+                }, 150);
+
+            } else if (sonuc !== isaretlenen && kSure !== "Süre Bitti") {
+                // YANLIŞ
+                gPuan = gPuan - 5;
+                var tbody = document.getElementById("table-body");
+                var row = document.createElement("tr");
+                row.className = "hover:bg-slate-50 transition-colors";
+                row.innerHTML = `
+                    <td class="p-3 font-semibold text-slate-800">${soru}</td>
+                    <td class="p-3 font-bold text-emerald-600">${sonuc}</td>
+                    <td class="p-3 font-bold text-rose-500 line-through">${isaretlenen}</td>
+                `;
+                tbody.appendChild(row);
+                document.getElementById("analizKutusu").classList.remove("hidden");
+                
+                loader.style.width = "0%";
+                loader.className = "h-3 rounded-full transition-all duration-300 bg-sky-500";
+                komboText.textContent = "+10 Puan";
+                document.getElementById("puan").innerHTML = gPuan;
+
+                tiklananButon.classList.add("!bg-rose-500", "!text-white", "!border-rose-500");
+                setTimeout(function(){
+                    tiklananButon.classList.remove("!bg-rose-500", "!text-white", "!border-rose-500");
+                }, 150);
+            }
+
+            var yeni = rastgeleSoru();
+            document.getElementById("soru").innerHTML = yeni.sayilar.join(" + ");
+            sonuc = yeni.sonuc;
+
+            var siklar = rastgeleSayi(sonuc);
+            document.getElementById("sA").textContent = siklar[0];
+            document.getElementById("sB").textContent = siklar[1];
+            document.getElementById("sC").textContent = siklar[2];
+            document.getElementById("sD").textContent = siklar[3];
+        }
+
+        function setButtonsDisabled(durum) {
+            ["sA", "sB", "sC", "sD"].forEach(function(id) {
+                document.getElementById(id).disabled = durum;
+            });
+        }
+
+        function basla() {
+            var count = 60;
+            document.getElementById("puan").innerHTML = 0;
+            document.getElementById("kalanSure").innerHTML = 60;
+            document.getElementById("loader").style.width = "0%";
+            document.getElementById("loader").className = "h-3 rounded-full transition-all duration-300 bg-sky-500";
+            document.getElementById("komboText").textContent = "+10 Puan";
+            document.getElementById("table-body").innerHTML = "";
+            document.getElementById("analizKutusu").classList.add("hidden");
+            document.getElementById("sonucMesaji").classList.add("hidden");
+
+            document.getElementById("baslaOverlay").classList.add("hidden");
+            setButtonsDisabled(false);
+
+            var yeni = rastgeleSoru();
+            document.getElementById("soru").innerHTML = yeni.sayilar.join(" + ");
+            sonuc = yeni.sonuc;
+
+            var siklar = rastgeleSayi(sonuc);
+            document.getElementById("sA").textContent = siklar[0];
+            document.getElementById("sB").textContent = siklar[1];
+            document.getElementById("sC").textContent = siklar[2];
+            document.getElementById("sD").textContent = siklar[3];
+            
+            if (interval) clearInterval(interval);
+
+            interval = setInterval(function(){
+                count--;
+                if (count <= 0){
+                    document.getElementById('kalanSure').innerHTML = "Süre Bitti";
+                    setButtonsDisabled(true);
+                    document.getElementById("sonPuan").textContent = document.getElementById("puan").textContent;
+                    document.getElementById("sonucMesaji").classList.remove("hidden");
+                    document.getElementById("baslaBtnYazi").textContent = "Tekrar Oyna";
+                    document.getElementById("baslaOverlay").classList.remove("hidden");
+                    clearInterval(interval);
+                } else {
+                    document.getElementById('kalanSure').innerHTML = count;
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
