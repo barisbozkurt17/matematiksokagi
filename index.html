@@ -38,7 +38,7 @@
 <body class="bg-slate-100/80 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
     <!-- 1. ÜST NAVİGASYON (HEADER) -->
-    <header class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
+    <header class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
             <!-- Logo & İsim -->
             <a href="index.html" class="flex items-center gap-3 group">
@@ -51,32 +51,58 @@
                 </div>
             </a>
 
-            <!-- Menü Linkleri -->
-            <nav class="flex items-center gap-1 sm:gap-2">
-                <a href="#oyunlar" class="px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+            <!-- Masaüstü Menü Linkleri (Telefonda Gizli) -->
+            <nav class="hidden md:flex items-center gap-2">
+                <a href="#oyunlar" class="px-3.5 py-1.5 text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
                     Oyunlar
                 </a>
-                <a href="#takip" class="px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+                <a href="#takip" class="px-3.5 py-1.5 text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
                     Ödev & Takip
                 </a>
-                <a href="#materyaller" class="px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+                <a href="#materyaller" class="px-3.5 py-1.5 text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
                     Materyaller
                 </a>
             </nav>
+
+            <!-- Mobil Menü Butonu (Hamburger) -->
+            <button id="mobileMenuBtn" type="button" aria-label="Menüyü Aç/Kapat"
+                    class="md:hidden w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none cursor-pointer">
+                <i id="menuIconClosed" data-lucide="menu" class="w-5 h-5"></i>
+                <i id="menuIconOpened" data-lucide="x" class="w-5 h-5 hidden"></i>
+            </button>
+        </div>
+
+        <!-- Mobil Açılır Menü Paneli (Aşağı Doğru Açılır) -->
+        <div id="mobileDropdown" class="hidden md:hidden border-t border-slate-800/80 bg-slate-950/98 px-4 pt-3 pb-5 space-y-1.5 shadow-2xl">
+            <a href="#oyunlar" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:text-white hover:bg-white/10 transition-all">
+                <i data-lucide="gamepad-2" class="w-4 h-4 text-emerald-400"></i>
+                <span>Matematik Oyunları</span>
+            </a>
+            <a href="#takip" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:text-white hover:bg-white/10 transition-all">
+                <i data-lucide="clipboard-list" class="w-4 h-4 text-indigo-400"></i>
+                <span>Ödev & Takip</span>
+            </a>
+            <a href="#materyaller" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:text-white hover:bg-white/10 transition-all">
+                <i data-lucide="folder-key" class="w-4 h-4 text-brand-400"></i>
+                <span>Ders Materyalleri</span>
+            </a>
         </div>
     </header>
 
     <!-- ANA İÇERİK -->
     <main class="flex-1 pb-16">
 
-        <!-- 2. TAM EKRAN HERO / KARŞILAMA BÖLÜMÜ -->
+        <!-- 2. TAM EKRAN HERO / SAYI UZAYI BÖLÜMÜ -->
         <section class="relative min-h-[calc(100vh-4rem)] min-h-[calc(100dvh-4rem)] flex flex-col justify-between items-center py-8 sm:py-12 px-4 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white overflow-hidden border-b border-slate-800/80">
+            <!-- Arka Plan Sayı Uzayı Canlı Canvas'ı -->
+            <canvas id="mathSpaceCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
             <!-- Arka Plan Işık Efekti -->
-            <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[800px] h-[350px] sm:h-[500px] bg-gradient-to-r from-brand-600 via-indigo-500 to-purple-600 blur-[120px] sm:blur-[150px] rounded-full"></div>
+            <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-25 z-0">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[800px] h-[350px] sm:h-[500px] bg-gradient-to-r from-brand-600 via-indigo-500 to-purple-600 blur-[130px] rounded-full"></div>
             </div>
 
-            <!-- Dengeleme Boşluğu (Ortalama için) -->
+            <!-- Dengeleme Boşluğu -->
             <div class="w-full h-2 sm:h-4"></div>
 
             <div class="max-w-3xl mx-auto text-center relative z-10 flex flex-col items-center my-auto w-full">
@@ -116,7 +142,6 @@
 
             <!-- 1. GRUP: EĞİTSEL MATEMATİK OYUNLARI -->
             <section id="oyunlar" class="scroll-mt-20 bg-white rounded-3xl p-5 sm:p-8 border border-slate-200/90 shadow-sm">
-                <!-- Grup Başlığı -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-slate-100 gap-2">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-xs shrink-0">
@@ -241,7 +266,6 @@
 
             <!-- 2. GRUP: ÖDEV & FORMLAR BÖLÜMÜ -->
             <section id="takip" class="scroll-mt-20 bg-white rounded-3xl p-5 sm:p-8 border border-slate-200/90 shadow-sm">
-                <!-- Grup Başlığı -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-slate-100 gap-2">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shadow-xs shrink-0">
@@ -258,7 +282,6 @@
                     <span class="text-xs font-semibold text-slate-400 self-start sm:self-center">2 Bağlantı</span>
                 </div>
 
-                <!-- Kartlar -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <!-- Ödev Kontrol Listesi -->
                     <a href="https://docs.google.com/spreadsheets/d/1GcwtImaLIB3Qw36oTzy13Ec-eDRMWDObWSTb6kn9BRY/edit?gid=55073469#gid=55073469" target="_blank" rel="noopener noreferrer"
@@ -300,7 +323,6 @@
 
             <!-- 3. GRUP: DERS MATERYALLERİ -->
             <section id="materyaller" class="scroll-mt-20 bg-white rounded-3xl p-5 sm:p-8 border border-slate-200/90 shadow-sm relative overflow-hidden">
-                <!-- Grup Başlığı -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-slate-100 gap-2">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center shadow-xs shrink-0">
@@ -360,11 +382,33 @@
         </div>
     </footer>
 
-    <!-- Lucide İkonlarını Başlat -->
+    <!-- Lucide İkonları, Mobil Hamburger Menü & Apps Script Entegrasyonu -->
     <script>
         lucide.createIcons();
 
-        // Apps Script Web App URL
+        // Mobil Menü Aç/Kapat Yönetimi
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDropdown = document.getElementById('mobileDropdown');
+        const menuIconClosed = document.getElementById('menuIconClosed');
+        const menuIconOpened = document.getElementById('menuIconOpened');
+
+        function toggleMobileMenu() {
+            const isHidden = mobileDropdown.classList.contains('hidden');
+            if (isHidden) {
+                mobileDropdown.classList.remove('hidden');
+                menuIconClosed.classList.add('hidden');
+                menuIconOpened.classList.remove('hidden');
+            } else {
+                mobileDropdown.classList.add('hidden');
+                menuIconClosed.classList.remove('hidden');
+                menuIconOpened.classList.add('hidden');
+            }
+        }
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        }
+
         const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzBR4rv-VfQ8a9aR64EqsPvAl7OeIN9KV3dCC3x26YmRQWA2WBwasJf64sZDa_vNTP/exec";
 
         async function handleDriveAccess(event) {
@@ -383,7 +427,6 @@
                 return;
             }
 
-            // Yükleniyor durumu
             submitBtn.disabled = true;
             btnText.textContent = "Kontrol ediliyor...";
             statusMsg.textContent = "Şifre doğrulanıyor...";
@@ -414,6 +457,220 @@
                 btnText.textContent = "Klasörü Aç";
             }
         }
+    </script>
+
+    <!-- SAYI UZAYI CANLI SİMÜLASYON MOTORU (STABİL, KİLİTLENMESİZ & AKICI) -->
+    <script>
+    (function() {
+        const canvas = document.getElementById('mathSpaceCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+
+        let width = 0, height = 0;
+        let particles = [];
+        const isMobile = window.innerWidth < 640;
+        const maxParticles = isMobile ? 16 : 28;
+        const basePrimes = [2, 3, 5, 7];
+
+        function resize() {
+            width = canvas.width = canvas.parentElement ? canvas.parentElement.offsetWidth : window.innerWidth;
+            height = canvas.height = canvas.parentElement ? canvas.parentElement.offsetHeight : window.innerHeight;
+            if (width === 0) width = window.innerWidth;
+            if (height === 0) height = 500;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class NumberNode {
+            constructor(x, y, value, vx, vy) {
+                this.x = (typeof x === 'number' && !isNaN(x)) ? x : Math.random() * (width || 800);
+                this.y = (typeof y === 'number' && !isNaN(y)) ? y : Math.random() * (height || 500);
+                this.value = value || basePrimes[Math.floor(Math.random() * basePrimes.length)];
+                
+                const speed = 0.7;
+                this.vx = (typeof vx === 'number' && !isNaN(vx)) ? vx : (Math.random() - 0.5) * speed;
+                this.vy = (typeof vy === 'number' && !isNaN(vy)) ? vy : (Math.random() - 0.5) * speed;
+                
+                this.updateRadius();
+                this.opacity = 0.38;
+                this.flash = 0;
+            }
+
+            updateRadius() {
+                this.radius = 14 + Math.min(Math.log2(Math.max(2, this.value)) * 3.2, 20);
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Duvar sınırları
+                if (this.x < this.radius) { 
+                    this.x = this.radius; 
+                    this.vx = Math.abs(this.vx); 
+                } else if (this.x > width - this.radius) { 
+                    this.x = width - this.radius; 
+                    this.vx = -Math.abs(this.vx); 
+                }
+
+                if (this.y < this.radius) { 
+                    this.y = this.radius; 
+                    this.vy = Math.abs(this.vy); 
+                } else if (this.y > height - this.radius) { 
+                    this.y = height - this.radius; 
+                    this.vy = -Math.abs(this.vy); 
+                }
+
+                if (this.flash > 0) this.flash -= 0.04;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+
+                if (this.flash > 0) {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.radius + (1 - this.flash) * 16, 0, Math.PI * 2);
+                    ctx.strokeStyle = `rgba(165, 180, 252, ${this.flash * 0.9})`;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+
+                ctx.beginPath();
+                ctx.arc(0, 0, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(99, 102, 241, ${0.1 + (this.flash * 0.25)})`;
+                ctx.fill();
+                ctx.strokeStyle = `rgba(165, 180, 252, ${0.28 + (this.flash * 0.5)})`;
+                ctx.lineWidth = 1.2;
+                ctx.stroke();
+
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity + (this.flash * 0.45)})`;
+                ctx.font = `bold ${Math.max(11, this.radius * 0.72)}px 'Plus Jakarta Sans', sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(this.value, 0, 0);
+
+                ctx.restore();
+            }
+        }
+
+        // Çarpanlara ayırıp güvenli şekilde yeni parçacık üretme
+        function getFragments(x, y, totalVal) {
+            let factors = [];
+            let temp = Math.round(totalVal);
+
+            for (let d = 2; d <= 7 && temp > 1; d++) {
+                while (temp % d === 0) {
+                    factors.push(d);
+                    temp = Math.floor(temp / d);
+                }
+            }
+            if (temp > 1 && temp <= 9) factors.push(temp);
+
+            if (factors.length < 2) {
+                factors = [2, 3];
+            }
+
+            const toSpawn = factors.slice(0, 3);
+            const angleStep = (Math.PI * 2) / toSpawn.length;
+            const fragments = [];
+
+            toSpawn.forEach((val, idx) => {
+                const angle = angleStep * idx + Math.random() * 0.4;
+                const speed = 1.1 + Math.random() * 0.5;
+                const spawnX = Math.max(25, Math.min(width - 25, x + Math.cos(angle) * 25));
+                const spawnY = Math.max(25, Math.min(height - 25, y + Math.sin(angle) * 25));
+
+                const child = new NumberNode(
+                    spawnX,
+                    spawnY,
+                    val,
+                    Math.cos(angle) * speed,
+                    Math.sin(angle) * speed
+                );
+                child.flash = 1;
+                fragments.push(child);
+            });
+
+            return fragments;
+        }
+
+        // Başlangıç parçacıkları
+        for (let i = 0; i < maxParticles; i++) {
+            particles.push(new NumberNode());
+        }
+
+        function handleCollisions() {
+            const toRemove = new Set();
+            const toAdd = [];
+
+            for (let i = 0; i < particles.length; i++) {
+                const p1 = particles[i];
+                if (toRemove.has(p1)) continue;
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    if (toRemove.has(p2)) continue;
+
+                    const dx = p2.x - p1.x;
+                    const dy = p2.y - p1.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const minDist = p1.radius + p2.radius;
+
+                    if (dist < minDist && dist > 0.001) {
+                        const product = p1.value * p2.value;
+
+                        if (product <= 100) {
+                            // ÇARPIM <= 100: BİRLEŞ
+                            p1.value = product;
+                            p1.updateRadius();
+                            p1.flash = 1;
+                            
+                            const angle = Math.atan2(dy, dx);
+                            p1.vx = Math.cos(angle) * 0.6;
+                            p1.vy = Math.sin(angle) * 0.6;
+                            
+                            toRemove.add(p2);
+                        } else {
+                            // ÇARPIM > 100: ANINDA PARÇALAN VE YOK OL
+                            toRemove.add(p1);
+                            toRemove.add(p2);
+
+                            const midX = (p1.x + p2.x) / 2;
+                            const midY = (p1.y + p2.y) / 2;
+
+                            const frags = getFragments(midX, midY, product);
+                            toAdd.push(...frags);
+                        }
+                        break;
+                    }
+                }
+            }
+
+            if (toRemove.size > 0) {
+                particles = particles.filter(p => !toRemove.has(p));
+            }
+            if (toAdd.length > 0) {
+                particles.push(...toAdd);
+            }
+
+            if (particles.length < maxParticles) {
+                particles.push(new NumberNode(Math.random() * width, Math.random() * height));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            handleCollisions();
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    })();
     </script>
 </body>
 </html>
