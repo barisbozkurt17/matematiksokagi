@@ -51,84 +51,80 @@
                 </div>
             </a>
 
-            <!-- Menü Linkleri (Desktop) -->
-            <nav class="hidden md:flex items-center gap-1.5">
-                <a href="#oyunlar" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
-                    Matematik Oyunları
+            <!-- Menü Linkleri -->
+            <nav class="flex items-center gap-1 sm:gap-2">
+                <a href="#oyunlar" class="px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+                    Oyunlar
                 </a>
-                <a href="#takip" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
-                    Ödev & Formlar
+                <a href="#takip" class="px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+                    Ödev & Takip
                 </a>
-                <a href="#materyaller" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
-                    Sınıf Materyalleri
+                <a href="#materyaller" class="px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+                    Materyaller
                 </a>
             </nav>
-
-            <!-- Kilitli Giriş Butonu -->
-            <div class="flex items-center gap-2">
-                <a href="#materyaller" class="inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white transition-all shadow-sm shadow-brand-500/30">
-                    <i data-lucide="folder-key" class="w-4 h-4"></i>
-                    <span>Materyal Girişi</span>
-                </a>
-            </div>
         </div>
     </header>
 
     <!-- ANA İÇERİK -->
     <main class="flex-1 pb-16">
 
-        <!-- 2. KOYU HERO / KARŞILAMA BÖLÜMÜ -->
-        <section class="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center py-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white overflow-hidden border-b border-slate-800/80">
+        <!-- 2. TAM EKRAN HERO / KARŞILAMA BÖLÜMÜ -->
+        <section class="relative min-h-[calc(100vh-4rem)] min-h-[calc(100dvh-4rem)] flex flex-col justify-between items-center py-8 sm:py-12 px-4 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white overflow-hidden border-b border-slate-800/80">
             <!-- Arka Plan Işık Efekti -->
             <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-gradient-to-r from-brand-600 via-indigo-500 to-purple-600 blur-[150px] rounded-full"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[800px] h-[350px] sm:h-[500px] bg-gradient-to-r from-brand-600 via-indigo-500 to-purple-600 blur-[120px] sm:blur-[150px] rounded-full"></div>
             </div>
 
-            <div class="max-w-4xl mx-auto px-4 text-center relative z-10 flex flex-col items-center my-auto">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-brand-500/10 text-brand-300 border border-brand-500/30 mb-6 backdrop-blur-md">
-                    <i data-lucide="sparkles" class="w-4 h-4 text-brand-400"></i>
+            <!-- Dengeleme Boşluğu (Ortalama için) -->
+            <div class="w-full h-2 sm:h-4"></div>
+
+            <div class="max-w-3xl mx-auto text-center relative z-10 flex flex-col items-center my-auto w-full">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-brand-500/10 text-brand-300 border border-brand-500/30 mb-4 sm:mb-6 backdrop-blur-md">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-400"></i>
                     <span>Eğlenceli Ders ve Etkileşim Portalı</span>
                 </div>
                 
-                <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.1] text-white">
+                <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.15] text-white">
                     Matematik Sokağı'na <br class="hidden sm:inline">Hoş Geldiniz
                 </h1>
                 
-                <p class="mt-5 text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
+                <p class="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-slate-300 max-w-xl mx-auto leading-relaxed font-normal px-2">
                     Hemen bir matematik oyunuyla hız kazanın, haftalık ödev takiplerine göz atın veya şifrenizle sınıf Drive arşivinize erişin.
                 </p>
 
-                <div class="mt-8 flex flex-wrap items-center justify-center gap-3.5">
-                    <a href="#oyunlar" class="px-7 py-3.5 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-sm sm:text-base shadow-xl shadow-brand-500/30 transition-all flex items-center gap-2.5 hover:-translate-y-1">
+                <!-- Aksiyon Butonları -->
+                <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto px-4 sm:px-0">
+                    <a href="#oyunlar" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-sm sm:text-base shadow-xl shadow-brand-500/30 transition-all flex items-center justify-center gap-2.5 hover:-translate-y-1">
                         <i data-lucide="gamepad-2" class="w-5 h-5"></i> Oyun Odasına Git
                     </a>
-                    <a href="#materyaller" class="px-7 py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white border border-white/20 font-extrabold text-sm sm:text-base backdrop-blur-md transition-all flex items-center gap-2.5 hover:-translate-y-1">
+                    <a href="#materyaller" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white border border-white/20 font-extrabold text-sm sm:text-base backdrop-blur-md transition-all flex items-center justify-center gap-2.5 hover:-translate-y-1">
                         <i data-lucide="folder-key" class="w-5 h-5 text-brand-300"></i> Drive Materyalleri
                     </a>
                 </div>
             </div>
 
             <!-- Aşağı Kaydır İpucu İkonu -->
-            <a href="#oyunlar" class="relative z-10 mt-auto pt-6 flex flex-col items-center gap-1.5 text-slate-400 hover:text-white transition-colors group cursor-pointer">
-                <span class="text-[11px] font-bold tracking-widest uppercase opacity-70 group-hover:opacity-100">Aşağı Kaydır</span>
-                <i data-lucide="chevron-down" class="w-5 h-5 animate-bounce"></i>
+            <a href="#oyunlar" class="relative z-10 pt-4 flex flex-col items-center gap-1 text-slate-400 hover:text-white transition-colors group cursor-pointer">
+                <span class="text-[10px] sm:text-[11px] font-bold tracking-widest uppercase opacity-70 group-hover:opacity-100">Aşağı Kaydır</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 sm:w-5 sm:h-5 animate-bounce"></i>
             </a>
         </section>
 
         <!-- GRUPLANMIŞ BÖLÜMLER ALANI -->
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-12 relative z-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-12 space-y-10 sm:space-y-12 relative z-20">
 
             <!-- 1. GRUP: EĞİTSEL MATEMATİK OYUNLARI -->
-            <section id="oyunlar" class="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm">
+            <section id="oyunlar" class="scroll-mt-20 bg-white rounded-3xl p-5 sm:p-8 border border-slate-200/90 shadow-sm">
                 <!-- Grup Başlığı -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-slate-100 gap-2">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-xs">
+                        <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-xs shrink-0">
                             <i data-lucide="gamepad-2" class="w-5 h-5"></i>
                         </div>
                         <div>
                             <div class="flex items-center gap-2">
-                                <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">Matematik Oyun Odası</h2>
+                                <h2 class="text-base sm:text-xl font-extrabold text-slate-900">Matematik Oyun Odası</h2>
                                 <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Aktif</span>
                             </div>
                             <p class="text-xs text-slate-500 mt-0.5">Akıllı tahta ve mobil cihazlarla tam uyumlu eğitsel matematik oyunları</p>
@@ -244,16 +240,16 @@
             </section>
 
             <!-- 2. GRUP: ÖDEV & FORMLAR BÖLÜMÜ -->
-            <section id="takip" class="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm">
+            <section id="takip" class="scroll-mt-20 bg-white rounded-3xl p-5 sm:p-8 border border-slate-200/90 shadow-sm">
                 <!-- Grup Başlığı -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-slate-100 gap-2">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shadow-xs">
+                        <div class="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shadow-xs shrink-0">
                             <i data-lucide="clipboard-list" class="w-5 h-5"></i>
                         </div>
                         <div>
                             <div class="flex items-center gap-2">
-                                <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">Sınıf Takip & Formlar</h2>
+                                <h2 class="text-base sm:text-xl font-extrabold text-slate-900">Sınıf Takip & Formlar</h2>
                                 <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800">Düzenli Takip</span>
                             </div>
                             <p class="text-xs text-slate-500 mt-0.5">Haftalık ödev kontrol tablosu ve öğrenci kitap okuma formu</p>
@@ -282,7 +278,7 @@
                         <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-400 group-hover:text-emerald-600 transition-colors"></i>
                     </a>
 
-                    <!-- 7/D Kitap Okuma Formu (Yeni Sayfa) -->
+                    <!-- 7/D Kitap Okuma Formu -->
                     <a href="kitapokuma.html" rel="noopener noreferrer"
                        class="group p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-purple-400 transition-all shadow-xs flex items-center justify-between">
                         <div class="flex items-center gap-4">
@@ -302,17 +298,17 @@
                 </div>
             </section>
 
-            <!-- 3. GRUP: DERS MATERYALLERİ (AÇIK TEMA, FERAH VE ŞIK) -->
-            <section id="materyaller" class="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm relative overflow-hidden">
+            <!-- 3. GRUP: DERS MATERYALLERİ -->
+            <section id="materyaller" class="scroll-mt-20 bg-white rounded-3xl p-5 sm:p-8 border border-slate-200/90 shadow-sm relative overflow-hidden">
                 <!-- Grup Başlığı -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-slate-100 gap-2">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center shadow-xs">
+                        <div class="w-10 h-10 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center shadow-xs shrink-0">
                             <i data-lucide="folder-key" class="w-5 h-5"></i>
                         </div>
                         <div>
                             <div class="flex items-center gap-2">
-                                <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">Ders Materyalleri & Klasörler</h2>
+                                <h2 class="text-base sm:text-xl font-extrabold text-slate-900">Ders Materyalleri & Klasörler</h2>
                                 <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-brand-100 text-brand-800">Şifreli Erişim</span>
                             </div>
                             <p class="text-xs text-slate-500 mt-0.5">Sınıfınıza özel Google Drive arşivine doğrudan bağlantı</p>
@@ -395,7 +391,6 @@
             statusMsg.classList.remove('hidden');
 
             try {
-                // Apps Script Web App'e JSON isteği at
                 const response = await fetch(`${APPS_SCRIPT_URL}?sifre=${encodeURIComponent(sifre)}`);
                 const data = await response.json();
 
