@@ -43,7 +43,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
             <!-- Logo & İsim -->
             <a href="index.html" class="flex items-center gap-3 group">
-                <img src="favicon.png" alt="Matematik Sokağı Logo" class="w-10 h-10 rounded-full shadow-md object-cover">    
+                <img src="favicon.png" alt="Matematik Sokağı Logo" class="w-10 h-10 rounded-full shadow-md object-cover border border-slate-700">    
                 <div>
                     <span class="text-base sm:text-lg font-bold text-white tracking-tight block leading-tight">Matematik Sokağı</span>
                     <span class="text-xs text-slate-400 font-medium block">Barış Bozkurt</span>
@@ -54,6 +54,9 @@
             <nav class="hidden md:flex items-center gap-2">
                 <a href="#oyunlar" class="px-3.5 py-1.5 text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
                     Oyunlar
+                </a>
+                <a href="#siteler" class="px-3.5 py-1.5 text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
+                    Siteler
                 </a>
                 <a href="#takip" class="px-3.5 py-1.5 text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all">
                     Ödev & Takip
@@ -76,6 +79,10 @@
             <a href="#oyunlar" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:text-white hover:bg-white/10 transition-all">
                 <i data-lucide="gamepad-2" class="w-4 h-4 text-emerald-400"></i>
                 <span>Matematik Oyunları</span>
+            </a>
+            <a href="#siteler" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:text-white hover:bg-white/10 transition-all">
+                <i data-lucide="globe" class="w-4 h-4 text-cyan-400"></i>
+                <span>Matematik Siteleri</span>
             </a>
             <a href="#takip" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:text-white hover:bg-white/10 transition-all">
                 <i data-lucide="clipboard-list" class="w-4 h-4 text-indigo-400"></i>
@@ -263,7 +270,156 @@
                 </div>
             </section>
 
-            <!-- 2. GRUP: ÖDEV & FORMLAR BÖLÜMÜ -->
+            <!-- YENİ BÖLÜM: MATEMATİK SİTELERİ & İNTERAKTİF ARAÇLAR (OYUNLARIN HEMEN ALTINDA) -->
+            <section id="siteler" class="scroll-mt-20 bg-white rounded-3xl p-5 sm:p-8 border border-slate-200/90 shadow-sm">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-slate-100 gap-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center shadow-xs shrink-0">
+                            <i data-lucide="globe" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h2 class="text-base sm:text-xl font-extrabold text-slate-900">Matematik Siteleri & İnteraktif Araçlar</h2>
+                                <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-cyan-100 text-cyan-800">Dijital Kütüphane</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-0.5">Akıllı tahtada, ders anlatımlarında ve somut modellemelerde kullanılan etkileşimli platformlar</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-400 self-start sm:self-center">8 Platform</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- 1. Mathigon Polypad -->
+                    <a href="https://tr.mathigon.org/polypad" target="_blank" rel="noopener noreferrer"
+                       class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-amber-400 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded">Manipülatif</span>
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400 group-hover:text-amber-600 transition-colors"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-amber-600 transition-colors">Mathigon (Polypad)</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Sanal kesir çubukları, cebir karoları, tangram ve geometri tuvali.
+                            </p>
+                        </div>
+                        <span class="mt-4 text-[11px] font-semibold text-amber-600 flex items-center gap-1">Siteye Git →</span>
+                    </a>
+
+                    <!-- 2. GeoGebra Geometri -->
+                    <a href="https://www.geogebra.org/geometry" target="_blank" rel="noopener noreferrer"
+                       class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-blue-400 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">Geometri & Ölçüm</span>
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-blue-600 transition-colors">GeoGebra Geometri</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Dinamik açıölçer, pergel, cetvel ve şekil çizim araçları.
+                            </p>
+                        </div>
+                        <span class="mt-4 text-[11px] font-semibold text-blue-600 flex items-center gap-1">Siteye Git →</span>
+                    </a>
+
+                    <!-- 3. Desmos -->
+                    <a href="https://www.desmos.com/calculator?lang=tr" target="_blank" rel="noopener noreferrer"
+                       class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-emerald-400 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Grafik & Koordinat</span>
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400 group-hover:text-emerald-600 transition-colors"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-emerald-600 transition-colors">Desmos Grafik</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Hızlı koordinat sistemi, doğrusal ilişkiler ve grafik çizimleri.
+                            </p>
+                        </div>
+                        <span class="mt-4 text-[11px] font-semibold text-emerald-600 flex items-center gap-1">Siteye Git →</span>
+                    </a>
+
+                    <!-- 4. The Math Learning Center -->
+                    <a href="https://www.mathlearningcenter.org/apps" target="_blank" rel="noopener noreferrer"
+                       class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-indigo-400 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded">Geoboard & Kesir</span>
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400 group-hover:text-indigo-600 transition-colors"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-indigo-600 transition-colors">Math Learning Center</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Lastikli geometri tahtası (geoboard), sayı doğrusu ve kesir modelleri.
+                            </p>
+                        </div>
+                        <span class="mt-4 text-[11px] font-semibold text-indigo-600 flex items-center gap-1">Siteye Git →</span>
+                    </a>
+
+                    <!-- 5. Didax Sanal Manipülatifler -->
+                    <a href="https://www.didax.com/math/virtual-manipulatives.html" target="_blank" rel="noopener noreferrer"
+                       class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-teal-400 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded">Cebir & Terazi</span>
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400 group-hover:text-teal-600 transition-colors"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-teal-600 transition-colors">Didax Manipülatifler</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Denklem dengesi terazisi, sayma pulları ve cebir karoları.
+                            </p>
+                        </div>
+                        <span class="mt-4 text-[11px] font-semibold text-teal-600 flex items-center gap-1">Siteye Git →</span>
+                    </a>
+
+                    <!-- 6. PhET Simülasyonları -->
+                    <a href="https://phet.colorado.edu/tr/simulations/browse?subjects=math" target="_blank" rel="noopener noreferrer"
+                       class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-purple-400 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded">Simülasyon</span>
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400 group-hover:text-purple-600 transition-colors"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-purple-600 transition-colors">PhET Simülasyonları</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Alan, kesirler ve oran-orantı konularında etkileşimli deneyler.
+                            </p>
+                        </div>
+                        <span class="mt-4 text-[11px] font-semibold text-purple-600 flex items-center gap-1">Siteye Git →</span>
+                    </a>
+
+                    <!-- 7. Wheel of Names (Çarkıfelek) -->
+                    <a href="https://wheelofnames.com/tr" target="_blank" rel="noopener noreferrer"
+                       class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-yellow-400 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-yellow-700 bg-yellow-50 px-2 py-0.5 rounded">Sınıf Aracı</span>
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400 group-hover:text-yellow-600 transition-colors"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-yellow-600 transition-colors">Wheel of Names</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Sınıf içi soru çözümü veya öğrenci seçimi için interaktif çark.
+                            </p>
+                        </div>
+                        <span class="mt-4 text-[11px] font-semibold text-yellow-600 flex items-center gap-1">Siteye Git →</span>
+                    </a>
+
+                    <!-- 8. Toy Theater Araçları -->
+                    <a href="https://toytheater.com/category/teacher-tools/math-tools/" target="_blank" rel="noopener noreferrer"
+                       class="p-5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200 hover:border-rose-400 transition-all shadow-xs flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded">Hızlı Araçlar</span>
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400 group-hover:text-rose-600 transition-colors"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-rose-600 transition-colors">Toy Theater</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Zar atma, saat simülasyonları ve taban blokları araçları.
+                            </p>
+                        </div>
+                        <span class="mt-4 text-[11px] font-semibold text-rose-600 flex items-center gap-1">Siteye Git →</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 3. GRUP: ÖDEV & FORMLAR BÖLÜMÜ -->
             <section id="takip" class="scroll-mt-20 bg-white rounded-3xl p-5 sm:p-8 border border-slate-200/90 shadow-sm">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-slate-100 gap-2">
                     <div class="flex items-center gap-3">
@@ -320,7 +476,7 @@
                 </div>
             </section>
 
-            <!-- 3. GRUP: DERS MATERYALLERİ -->
+            <!-- 4. GRUP: DERS MATERYALLERİ -->
             <section id="materyaller" class="scroll-mt-20 bg-white rounded-3xl p-5 sm:p-8 border border-slate-200/90 shadow-sm relative overflow-hidden">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 mb-6 border-b border-slate-100 gap-2">
                     <div class="flex items-center gap-3">
@@ -367,10 +523,11 @@
         </div>
     </main>
 
-    <!-- 4. FOOTER -->
+    <!-- 5. FOOTER -->
     <footer class="bg-white border-t border-slate-200 py-6 mt-12">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
             <div class="flex items-center gap-2 font-medium">
+                <img src="favicon.png" alt="Logo" class="w-5 h-5 rounded-full object-cover">
                 <span class="font-bold text-slate-800">Matematik Sokağı</span>
                 <span>•</span>
                 <span>Barış Bozkurt</span>
@@ -411,62 +568,62 @@
         const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzBR4rv-VfQ8a9aR64EqsPvAl7OeIN9KV3dCC3x26YmRQWA2WBwasJf64sZDa_vNTP/exec";
 
         async function handleDriveAccess(event) {
-    event.preventDefault();
+            event.preventDefault();
 
-    const sifreInput = document.getElementById('accessPassword');
-    const submitBtn = document.getElementById('submitBtn');
-    const btnText = document.getElementById('btnText');
-    const statusMsg = document.getElementById('driveStatusMessage');
-    const sifre = sifreInput.value.trim();
+            const sifreInput = document.getElementById('accessPassword');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const statusMsg = document.getElementById('driveStatusMessage');
+            const sifre = sifreInput.value.trim();
 
-    if (!sifre) {
-        statusMsg.textContent = "Lütfen bir şifre girin.";
-        statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
-        statusMsg.classList.remove('hidden');
-        return;
-    }
-
-    // Tıklama anında sekmeyi hemen aç (Pop-up blocker'a takılmaz)
-    const newTab = window.open('about:blank', '_blank');
-
-    submitBtn.disabled = true;
-    btnText.textContent = "Kontrol ediliyor...";
-    statusMsg.textContent = "Şifre doğrulanıyor...";
-    statusMsg.className = "text-xs text-slate-500 mt-3 min-h-[18px]";
-    statusMsg.classList.remove('hidden');
-
-    try {
-        const response = await fetch(`${APPS_SCRIPT_URL}?sifre=${encodeURIComponent(sifre)}`);
-        const data = await response.json();
-
-        if (data.status === "success" && data.url) {
-            statusMsg.textContent = "✓ Şifre doğru! Klasör açılıyor...";
-            statusMsg.className = "text-xs text-emerald-600 font-bold mt-3 min-h-[18px]";
-            sifreInput.value = "";
-            
-            // Açılan sekmeyi Drive klasörüne yönlendir
-            if (newTab) {
-                newTab.location.href = data.url;
-            } else {
-                window.location.href = data.url;
+            if (!sifre) {
+                statusMsg.textContent = "Lütfen bir şifre girin.";
+                statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
+                statusMsg.classList.remove('hidden');
+                return;
             }
-        } else {
-            if (newTab) newTab.close(); // Hatalıysa açılan boş sekmeyi kapat
-            statusMsg.textContent = "Hatalı şifre girdiniz. Lütfen tekrar deneyin.";
-            statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
-            sifreInput.value = "";
-            sifreInput.focus();
+
+            // Tıklama anında sekmeyi hemen aç (Pop-up blocker'a takılmaz)
+            const newTab = window.open('about:blank', '_blank');
+
+            submitBtn.disabled = true;
+            btnText.textContent = "Kontrol ediliyor...";
+            statusMsg.textContent = "Şifre doğrulanıyor...";
+            statusMsg.className = "text-xs text-slate-500 mt-3 min-h-[18px]";
+            statusMsg.classList.remove('hidden');
+
+            try {
+                const response = await fetch(`${APPS_SCRIPT_URL}?sifre=${encodeURIComponent(sifre)}`);
+                const data = await response.json();
+
+                if (data.status === "success" && data.url) {
+                    statusMsg.textContent = "✓ Şifre doğru! Klasör açılıyor...";
+                    statusMsg.className = "text-xs text-emerald-600 font-bold mt-3 min-h-[18px]";
+                    sifreInput.value = "";
+                    
+                    // Açılan sekmeyi Drive klasörüne yönlendir
+                    if (newTab) {
+                        newTab.location.href = data.url;
+                    } else {
+                        window.location.href = data.url;
+                    }
+                } else {
+                    if (newTab) newTab.close(); // Hatalıysa açılan boş sekmeyi kapat
+                    statusMsg.textContent = "Hatalı şifre girdiniz. Lütfen tekrar deneyin.";
+                    statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
+                    sifreInput.value = "";
+                    sifreInput.focus();
+                }
+            } catch (error) {
+                if (newTab) newTab.close();
+                console.error("Hata:", error);
+                statusMsg.textContent = "Bağlantı hatası oluştu. Lütfen tekrar deneyin.";
+                statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
+            } finally {
+                submitBtn.disabled = false;
+                btnText.textContent = "Klasörü Aç";
+            }
         }
-    } catch (error) {
-        if (newTab) newTab.close();
-        console.error("Hata:", error);
-        statusMsg.textContent = "Bağlantı hatası oluştu. Lütfen tekrar deneyin.";
-        statusMsg.className = "text-xs text-rose-600 font-semibold mt-3 min-h-[18px]";
-    } finally {
-        submitBtn.disabled = false;
-        btnText.textContent = "Klasörü Aç";
-    }
-}
     </script>
 
     <!-- SAYI UZAYI CANLI SİMÜLASYON MOTORU (STABİL, KİLİTLENMESİZ & AKICI) -->
@@ -564,7 +721,6 @@
             }
         }
 
-        // Çarpanlara ayırıp güvenli şekilde yeni parçacık üretme
         function getFragments(x, y, totalVal) {
             let factors = [];
             let temp = Math.round(totalVal);
@@ -605,7 +761,6 @@
             return fragments;
         }
 
-        // Başlangıç parçacıkları
         for (let i = 0; i < maxParticles; i++) {
             particles.push(new NumberNode());
         }
@@ -631,7 +786,6 @@
                         const product = p1.value * p2.value;
 
                         if (product <= 100) {
-                            // ÇARPIM <= 100: BİRLEŞ
                             p1.value = product;
                             p1.updateRadius();
                             p1.flash = 1;
@@ -642,7 +796,6 @@
                             
                             toRemove.add(p2);
                         } else {
-                            // ÇARPIM > 100: ANINDA PARÇALAN VE YOK OL
                             toRemove.add(p1);
                             toRemove.add(p2);
 
