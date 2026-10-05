@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="tr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödev Teslim Portalı | Matematik Sokağı</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-full flex flex-col select-none">
+
+    <!-- ÜST BAR (SOLDA BAŞLIK/GERİ BUTONU, SAĞDA LOGO VE LİNK) -->
+    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200/90 px-4 sm:px-6 h-16 flex items-center justify-between shrink-0 sticky top-0 z-30 shadow-xs">
+        
+        <!-- Sol Taraf: Geri Dön Butonu ve Sayfa Başlığı -->
+        <div class="flex items-center gap-3">
+            <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 text-slate-700 text-xs font-bold transition-all border border-slate-200/60 active:scale-95">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">Ana Sayfa</span>
+            </a>
+            
+            <div class="h-5 w-px bg-slate-200"></div>
+
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-200/60 flex items-center justify-center font-bold shadow-xs">
+                    <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+                </div>
+                <div>
+                    <h1 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">Ödev Teslim Portalı</h1>
+                    <span class="text-[10px] text-slate-500 font-semibold block sm:hidden">Drive Arşivi</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sağ Taraf: Matematik Sokağı Logosu ve Bağlantısı -->
+        <div class="flex items-center gap-2.5">
+            <a href="index.html" class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-2xl hover:bg-slate-50 transition-all group">
+                <div class="text-right hidden sm:block">
+                    <span class="text-xs font-extrabold text-slate-900 block leading-tight group-hover:text-indigo-600 transition-colors">Matematik Sokağı</span>
+                    <span class="text-[10px] text-slate-400 font-medium block">Barış Bozkurt</span>
+                </div>
+                <img src="favicon.png" alt="Matematik Sokağı Logo" class="w-8 h-8 rounded-full shadow-xs object-cover border border-slate-200 group-hover:scale-105 transition-transform">
+            </a>
+        </div>
+    </header>
+
+    <!-- ANA FORM ALANI -->
+    <main class="flex-1 max-w-xl w-full mx-auto p-4 sm:p-6 flex flex-col justify-center items-center">
+
+        <div class="w-full bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200/90">
+            
+            <!-- Başlık ve Rozet -->
+            <div class="text-center pb-6 mb-6 border-b border-slate-100">
+                <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-100 mx-auto flex items-center justify-center mb-3 shadow-xs">
+                    <i data-lucide="folder-up" class="w-6 h-6"></i>
+                </div>
+                <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">Ödevini Teslim Et</h2>
+                <p class="text-xs text-slate-500 mt-1">Numaranı girip ödevini seç, fotoğraf veya PDF'ini hemen yükle.</p>
+            </div>
+
+            <!-- 1. ADIM: NUMARA SORGULAMA -->
+            <div class="space-y-1.5">
+                <label for="ogrenciNo" class="block text-[11px] font-black text-slate-600 uppercase tracking-wider">Öğrenci Numarası</label>
+                <div class="flex gap-2">
+                    <div class="relative flex-1">
+                        <i data-lucide="hash" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                        <input type="text" id="ogrenciNo" placeholder="Örn: 245" autocomplete="off"
+                               class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-50 border-2 border-slate-200 text-slate-800 placeholder-slate-400 text-sm font-bold focus:outline-none focus:border-indigo-500 focus:bg-white transition-all shadow-inner">
+                    </div>
+                    <button id="btnSorgula" onclick="sorgula()" 
+                            class="px-5 py-2.5 rounded-2xl bg-slate-900 hover:bg-indigo-600 text-white font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 flex items-center gap-1.5 shrink-0 cursor-pointer">
+                        <span id="btnSorgulaText">Sorgula</span>
+                        <i id="btnSorgulaIcon" data-lucide="search" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sorgu Hata Kutusu -->
+            <div id="sorguHata" class="hidden mt-3 p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold flex items-center gap-2">
+                <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
+                <span id="sorguHataMetin"></span>
+            </div>
+
+            <!-- 2. ADIM: ÖĞRENCİ BİLGİLERİ VE DOSYA YÜKLEME -->
+            <div id="odevFormu" class="hidden mt-6 pt-6 border-t border-slate-100 space-y-4">
+                
+                <!-- Öğrenci Kartı -->
+                <div class="p-3.5 rounded-2xl bg-blue-50 border-2 border-blue-500 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] font-bold text-blue-600 uppercase tracking-wider block">Öğrenci</span>
+                        <span class="text-xs sm:text-sm font-extrabold text-slate-900" id="lblAdSoyad"></span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[10px] font-bold text-blue-600 uppercase tracking-wider block">Sınıf</span>
+                        <span class="text-xs sm:text-sm font-black text-blue-800" id="lblSinif"></span>
+                    </div>
+                </div>
+
+                <!-- Ödev Seçim Alanı -->
+                <div class="space-y-1.5">
+                    <label for="odevSecim" class="block text-[11px] font-black text-slate-600 uppercase tracking-wider">Teslim Edilecek Ödev</label>
+                    <div class="relative">
+                        <select id="odevSecim" 
+                                class="w-full pl-3.5 pr-8 py-2.5 rounded-2xl bg-slate-50 border-2 border-slate-200 text-slate-800 text-sm font-bold focus:outline-none focus:border-indigo-500 focus:bg-white transition-all appearance-none cursor-pointer">
+                        </select>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                    </div>
+                </div>
+
+                <!-- Dosya Seçim Alanı -->
+                <div class="space-y-1.5">
+                    <label for="dosyaInput" class="block text-[11px] font-black text-slate-600 uppercase tracking-wider">Ödev Dosyası (Fotoğraf veya PDF)</label>
+                    <input type="file" id="dosyaInput" accept="image/*,application/pdf"
+                           class="w-full text-xs text-slate-500 file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-slate-900 file:text-white hover:file:bg-indigo-600 cursor-pointer border-2 border-slate-200 rounded-2xl p-1 bg-slate-50 transition-all">
+                    <p class="text-[10px] text-slate-400 font-bold mt-1">Maksimum: 20 MB (JPG, PNG veya PDF)</p>
+                </div>
+
+                <!-- Gönder Butonu -->
+                <button id="btnYukle" onclick="odeviGonder()" 
+                        class="w-full mt-2 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-sm transition-all shadow-md shadow-indigo-600/20 active:scale-98 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span id="btnYukleText">Ödevi Yükle ve Teslim Et</span>
+                    <i id="btnYukleIcon" data-lucide="send" class="w-4 h-4"></i>
+                </button>
+
+                <!-- Bildirim Mesajı -->
+                <div id="sonucMesaji" class="hidden mt-3 p-3.5 rounded-2xl text-xs font-bold flex items-center gap-2"></div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ALT BİLGİ -->
+    <footer class="text-center py-4 text-xs text-slate-400 font-semibold shrink-0">
+        Matematik Sokağı &copy; 2026 • Ödev Teslim Sistemi
+    </footer>
+
+    <!-- JAVASCRIPT MOTORU -->
+    <script>
+        lucide.createIcons();
+
+        // ========================================================
+        // Apps Script Web App URL'nizi buraya yapıştırın:
+        const API_URL = "https://script.google.com/macros/s/AKfycbx8xk_5b80fCiQ0Oa7RBj2IwP2lJ0-KLak4PArPQ6NzBBqeyBuXvb8O6imnIKPXkAK-IQ/exec";
+        // ========================================================
+
+        let aktifOgrenci = null;
+
+        // Enter ile sorgulama
+        document.getElementById("ogrenciNo").addEventListener("keydown", function(e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                sorgula();
+            }
+        });
+
+        async function sorgula() {
+            const no = document.getElementById("ogrenciNo").value.trim();
+            const btn = document.getElementById("btnSorgula");
+            const btnText = document.getElementById("btnSorgulaText");
+            const hataDiv = document.getElementById("sorguHata");
+            const hataMetin = document.getElementById("sorguHataMetin");
+            const formDiv = document.getElementById("odevFormu");
+
+            hataDiv.classList.add("hidden");
+            formDiv.classList.add("hidden");
+
+            if (!no) {
+                hataMetin.innerText = "Lütfen numaranızı girin.";
+                hataDiv.classList.remove("hidden");
+                return;
+            }
+
+            btn.disabled = true;
+            btnText.innerText = "Aranıyor...";
+
+            try {
+                const response = await fetch(`${API_URL}?action=ogrenciSorgula&no=${encodeURIComponent(no)}`);
+                const res = await response.json();
+
+                btn.disabled = false;
+                btnText.innerText = "Sorgula";
+
+                if (res.bulundu) {
+                    aktifOgrenci = res;
+                    document.getElementById("lblAdSoyad").innerText = res.adSoyad;
+                    document.getElementById("lblSinif").innerText = res.sinif;
+
+                    const odevSelect = document.getElementById("odevSecim");
+                    odevSelect.innerHTML = "";
+                    
+                    if (!res.odevler || res.odevler.length === 0) {
+                        const opt = document.createElement("option");
+                        opt.innerText = "Aktif ödev bulunamadı";
+                        odevSelect.appendChild(opt);
+                    } else {
+                        res.odevler.forEach(odev => {
+                            const opt = document.createElement("option");
+                            opt.value = odev;
+                            opt.innerText = odev;
+                            odevSelect.appendChild(opt);
+                        });
+                    }
+
+                    formDiv.classList.remove("hidden");
+                    lucide.createIcons();
+                } else {
+                    hataMetin.innerText = res.mesaj || "Öğrenci bulunamadı. Lütfen numaranızı kontrol edin.";
+                    hataDiv.classList.remove("hidden");
+                }
+            } catch (err) {
+                btn.disabled = false;
+                btnText.innerText = "Sorgula";
+                hataMetin.innerText = "Bağlantı hatası: Sunucuya erişilemedi.";
+                hataDiv.classList.remove("hidden");
+            }
+        }
+
+        async function odeviGonder() {
+            const dosyaInput = document.getElementById("dosyaInput");
+            const odevAdi = document.getElementById("odevSecim").value;
+            const btnYukle = document.getElementById("btnYukle");
+            const btnYukleText = document.getElementById("btnYukleText");
+            const sonucDiv = document.getElementById("sonucMesaji");
+
+            sonucDiv.classList.add("hidden");
+
+            if (!dosyaInput.files.length) {
+                alert("Lütfen teslim edeceğiniz ödev fotoğrafını veya PDF dosyasını seçin.");
+                return;
+            }
+
+            const file = dosyaInput.files[0];
+            if (file.size > 20 * 1024 * 1024) {
+                alert("Dosya boyutu 20 MB'tan büyük olamaz!");
+                return;
+            }
+
+            btnYukle.disabled = true;
+            btnYukleText.innerText = "Yükleniyor, lütfen bekleyin...";
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                const base64Data = e.target.result.split(',')[1];
+
+                const payload = {
+                    ogrenciNo: aktifOgrenci.ogrenciNo,
+                    adSoyad: aktifOgrenci.adSoyad,
+                    sinif: aktifOgrenci.sinif,
+                    odevAdi: odevAdi,
+                    dosyaData: base64Data,
+                    dosyaAdi: file.name,
+                    mimeType: file.type || "application/octet-stream"
+                };
+
+                try {
+                    const response = await fetch(API_URL, {
+                        method: "POST",
+                        headers: { "Content-Type": "text/plain;charset=utf-8" },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const sonuc = await response.json();
+
+                    btnYukle.disabled = false;
+                    btnYukleText.innerText = "Ödevi Yükle ve Teslim Et";
+
+                    if (sonuc.basarili) {
+                        sonucDiv.className = "mt-3 p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2";
+                        sonucDiv.innerHTML = `<span>✓ ${sonuc.mesaj}</span>`;
+                        sonucDiv.classList.remove("hidden");
+                        dosyaInput.value = "";
+                    } else {
+                        sonucDiv.className = "mt-3 p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-bold flex items-center gap-2";
+                        sonucDiv.innerHTML = `<span>✕ Hata: ${sonuc.mesaj}</span>`;
+                        sonucDiv.classList.remove("hidden");
+                    }
+                } catch (err) {
+                    btnYukle.disabled = false;
+                    btnYukleText.innerText = "Ödevi Yükle ve Teslim Et";
+                    sonucDiv.className = "mt-3 p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-bold flex items-center gap-2";
+                    sonucDiv.innerHTML = `<span>✕ Bağlantı hatası: ${err.message}</span>`;
+                    sonucDiv.classList.remove("hidden");
+                }
+            };
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>
