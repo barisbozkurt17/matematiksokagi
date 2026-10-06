@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7/D Oturma Plani | Matematik Sokağı</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="h-full m-0 p-0 flex flex-col bg-slate-900 overflow-hidden">
+
+    <!-- Üst Kontrol Çubuğu (Navbar) -->
+    <header class="h-14 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 sm:px-6 flex items-center justify-between shrink-0 z-20">
+        <div class="flex items-center gap-3">
+            <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span>Ana Sayfaya Dön</span>
+            </a>
+            <div class="h-4 w-px bg-slate-200 hidden sm:block"></div>
+            <div class="flex items-center gap-2">
+                <i data-lucide="book-open" class="w-4 h-4 text-purple-600"></i>
+                <span class="text-xs sm:text-sm font-bold text-slate-900">7/D Oturma Plani</span>
+            </div>
+        </div>
+
+        <!-- Sağ Taraf: Matematik Sokağı Logosu ve Bağlantısı -->
+        <div class="flex items-center gap-2.5">
+            <a href="index.html" class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-2xl hover:bg-slate-50 transition-all group">
+                <div class="text-right hidden sm:block">
+                    <span class="text-xs font-extrabold text-slate-900 block leading-tight group-hover:text-indigo-600 transition-colors">Matematik Sokağı</span>
+                    <span class="text-[10px] text-slate-400 font-medium block">Barış Bozkurt</span>
+                </div>
+                <img src="favicon.png" alt="Matematik Sokağı Logo" class="w-8 h-8 rounded-full shadow-xs object-cover border border-slate-200 group-hover:scale-105 transition-transform">
+            </a>
+        </div>
+    </header>
+
+    <!-- Tam Ekran İframe Alanı (Kendi Domaininiz Altında Kalır) -->
+    <main class="flex-1 w-full h-full relative bg-slate-100">
+        <iframe 
+            src="https://script.google.com/macros/s/AKfycbyHD-eYZuM346P0C1_nmQfT-SnEz1aNmj8jPgb2u8TrvtaaVexJd-Dr5o-hsHWj8ghtOg/exec" 
+            class="w-full h-full border-0 absolute inset-0"
+            allow="fullscreen"
+            loading="lazy">
+        </iframe>
+    </main>
+
+    <!-- Lucide İkonları Başlat -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
