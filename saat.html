@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saat | Matematik Sokağı</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="h-full m-0 p-0 relative bg-slate-950 overflow-hidden">
+
+    <!-- İframe Üzerinde Yüzen Kompakt Kontrol Çubuğu -->
+    <header class="fixed top-3 inset-x-3 sm:inset-x-6 z-30 flex items-center justify-between pointer-events-none">
+        <!-- Sol Taraf: Geri Dön Butonu ve Saat Başlığı -->
+        <div class="pointer-events-auto flex items-center gap-2 bg-slate-900/80 backdrop-blur-md p-1.5 pr-3.5 rounded-2xl border border-slate-800/80 shadow-lg shadow-black/30">
+            <a href="index.html" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-semibold border border-slate-700/50 transition-all">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5 text-slate-400"></i>
+                <span class="hidden sm:inline">Ana Sayfa</span>
+            </a>
+            
+            <div class="h-3.5 w-px bg-slate-700/60 hidden sm:block"></div>
+            
+            <div class="flex items-center gap-1.5 pl-1 sm:pl-0">
+                <i data-lucide="clock" class="w-3.5 h-3.5 text-indigo-400"></i>
+                <span class="text-xs font-bold text-slate-200 tracking-wide">Saat</span>
+            </div>
+        </div>
+
+        <!-- Sağ Taraf: Logo ve Site Bilgisi -->
+        <div class="pointer-events-auto">
+            <a href="index.html" class="flex items-center gap-2 bg-slate-900/80 backdrop-blur-md p-1.5 sm:px-3 sm:py-1.5 rounded-2xl border border-slate-800/80 shadow-lg shadow-black/30 hover:border-indigo-500/40 transition-all group">
+                <div class="text-right hidden sm:block">
+                    <span class="text-[11px] font-bold text-slate-200 block leading-tight group-hover:text-indigo-400 transition-colors">Matematik Sokağı</span>
+                    <span class="text-[9px] text-slate-400 font-medium block">Barış Bozkurt</span>
+                </div>
+                <img src="favicon.png" alt="Matematik Sokağı Logo" class="w-7 h-7 rounded-xl object-cover border border-slate-700 group-hover:scale-105 transition-transform">
+            </a>
+        </div>
+    </header>
+
+    <!-- Tam Ekran İframe Alanı -->
+    <main class="w-full h-full absolute inset-0 bg-slate-950">
+        <iframe 
+            src="https://script.google.com/macros/s/AKfycby80HIuhMeG3mdfraoru76jk8dn7tfVt6CibRW1wAfjngZLfcTvg9zR_ymeQGmv0ExXGA/exec" 
+            class="w-full h-full border-0"
+            allow="fullscreen"
+            loading="lazy">
+        </iframe>
+    </main>
+
+    <!-- Lucide İkonları Başlat -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
