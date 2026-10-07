@@ -24,10 +24,10 @@
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased min-h-full flex flex-col select-none">
 
-    <!-- ÜST BAR (SOLDA BAŞLIK/GERİ BUTONU, SAĞDA LOGO VE LİNK) -->
+    <!-- ÜST BAR -->
     <header class="bg-white/95 backdrop-blur-md border-b border-slate-200/90 px-4 sm:px-6 h-16 flex items-center justify-between shrink-0 sticky top-0 z-30 shadow-xs">
         
-        <!-- Sol Taraf: Geri Dön Butonu ve Sayfa Başlığı -->
+        <!-- Sol Taraf -->
         <div class="flex items-center gap-3">
             <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 text-slate-700 text-xs font-bold transition-all border border-slate-200/60 active:scale-95">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i>
@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <!-- Sağ Taraf: Matematik Sokağı Logosu ve Bağlantısı -->
+        <!-- Sağ Taraf: Matematik Sokağı Logosu -->
         <div class="flex items-center gap-2.5">
             <a href="index.html" class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-2xl hover:bg-slate-50 transition-all group">
                 <div class="text-right hidden sm:block">
@@ -115,11 +115,25 @@
                 <div class="space-y-1.5">
                     <label for="odevSecim" class="block text-[11px] font-black text-slate-600 uppercase tracking-wider">Teslim Edilecek Ödev</label>
                     <div class="relative">
-                        <select id="odevSecim" 
+                        <select id="odevSecim" onchange="seciliOdevDurumunuGoster()"
                                 class="w-full pl-3.5 pr-8 py-2.5 rounded-2xl bg-slate-50 border-2 border-slate-200 text-slate-800 text-sm font-bold focus:outline-none focus:border-indigo-500 focus:bg-white transition-all appearance-none cursor-pointer">
                         </select>
                         <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
                     </div>
+                </div>
+
+                <!-- ÖNCEDEN YÜKLENEN ÖDEV DURUMU (ANINDA GÖSTERİM) -->
+                <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-1.5 text-slate-700 text-xs font-extrabold">
+                            <i data-lucide="file-check-2" class="w-4 h-4 text-indigo-600"></i>
+                            <span>Ödev Teslim Durumu</span>
+                        </div>
+                        <span id="dosyaSayisiRozet" class="text-[10px] font-bold bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full">-</span>
+                    </div>
+
+                    <!-- Teslim Durum Kutusu -->
+                    <div id="yuklenenDosyalarKutusu" class="pt-1"></div>
                 </div>
 
                 <!-- Dosya Seçim Alanı -->
@@ -155,7 +169,7 @@
         lucide.createIcons();
 
         // ========================================================
-        // Apps Script Web App URL'nizi buraya yapıştırın:
+        // Apps Script Web App URL'niz:
         const API_URL = "https://script.google.com/macros/s/AKfycbx8xk_5b80fCiQ0Oa7RBj2IwP2lJ0-KLak4PArPQ6NzBBqeyBuXvb8O6imnIKPXkAK-IQ/exec";
         // ========================================================
 
@@ -208,13 +222,17 @@
                         const opt = document.createElement("option");
                         opt.innerText = "Aktif ödev bulunamadı";
                         odevSelect.appendChild(opt);
+                        durumKutusunuGuncelle([]);
                     } else {
-                        res.odevler.forEach(odev => {
+                        res.odevler.forEach(item => {
                             const opt = document.createElement("option");
-                            opt.value = odev;
-                            opt.innerText = odev;
+                            opt.value = item.ad;
+                            opt.innerText = item.ad;
                             odevSelect.appendChild(opt);
                         });
+                        
+                        // İkinci bir fetch İSTEĞİ YAPMADAN eldeki veriden anında göster!
+                        seciliOdevDurumunuGoster();
                     }
 
                     formDiv.classList.remove("hidden");
@@ -229,6 +247,56 @@
                 hataMetin.innerText = "Bağlantı hatası: Sunucuya erişilemedi.";
                 hataDiv.classList.remove("hidden");
             }
+        }
+
+        // Dropdown değiştiğinde sunucuya gitmeden yerel veriden anında gösterir
+        function seciliOdevDurumunuGoster() {
+            if (!aktifOgrenci || !aktifOgrenci.odevler) return;
+
+            const seciliAd = document.getElementById("odevSecim").value;
+            const odevObj = aktifOgrenci.odevler.find(o => o.ad === seciliAd);
+
+            durumKutusunuGuncelle(odevObj ? odevObj.teslimler : []);
+        }
+
+        // Durum kutusunu temiz ve net şekilde basar
+        function durumKutusunuGuncelle(teslimler) {
+            const kutu = document.getElementById("yuklenenDosyalarKutusu");
+            const rozet = document.getElementById("dosyaSayisiRozet");
+            kutu.innerHTML = "";
+
+            const adet = teslimler ? teslimler.length : 0;
+
+            if (adet === 0) {
+                rozet.className = "text-[10px] font-bold bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full";
+                rozet.innerText = "Teslim Edilmedi";
+                kutu.innerHTML = `
+                    <div class="flex items-center gap-2 p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold">
+                        <i data-lucide="info" class="w-4 h-4 shrink-0 text-amber-600"></i>
+                        <span>Bu ödev için henüz teslim edilmiş bir dosyanız bulunmuyor.</span>
+                    </div>
+                `;
+            } else {
+                rozet.className = "text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full";
+                rozet.innerText = `${adet} Dosya Teslim Edildi`;
+
+                let rozetlerHtml = teslimler.map(etiket => 
+                    `<span class="inline-flex items-center px-2 py-0.5 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-700 text-[11px] font-bold mr-1.5 mb-1.5">✓ ${etiket}</span>`
+                ).join("");
+
+                kutu.innerHTML = `
+                    <div class="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 space-y-1.5">
+                        <div class="flex items-center gap-1.5 text-xs font-extrabold text-emerald-800">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                            <span>Teslim edilmiş <strong>${adet} adet ödeviniz</strong> bulunmaktadır.</span>
+                        </div>
+                        <div class="pt-1 flex flex-wrap">
+                            ${rozetlerHtml}
+                        </div>
+                    </div>
+                `;
+            }
+            lucide.createIcons();
         }
 
         async function odeviGonder() {
@@ -285,6 +353,15 @@
                         sonucDiv.innerHTML = `<span>✓ ${sonuc.mesaj}</span>`;
                         sonucDiv.classList.remove("hidden");
                         dosyaInput.value = "";
+
+                        // Yerel öğrenci verisini güncelle ve kutuyu anında yenile
+                        if (sonuc.teslimler) {
+                            const seciliOdev = aktifOgrenci.odevler.find(o => o.ad === odevAdi);
+                            if (seciliOdev) {
+                                seciliOdev.teslimler = sonuc.teslimler;
+                            }
+                            durumKutusunuGuncelle(sonuc.teslimler);
+                        }
                     } else {
                         sonucDiv.className = "mt-3 p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-bold flex items-center gap-2";
                         sonucDiv.innerHTML = `<span>✕ Hata: ${sonuc.mesaj}</span>`;
