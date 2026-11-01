@@ -310,9 +310,15 @@
                 card.className = `rounded-2xl border p-4 shadow-2xs transition-all ${cardStyle}`;
                 card.innerHTML = `
                     <div class="flex items-center justify-between gap-2 flex-wrap mb-2.5">
-                        <div class="flex items-center gap-1.5 text-xs font-extrabold text-slate-900">
-                            <i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-600"></i>
-                            <span>Son Teslim: ${escapeHtml(hw.sonTarih)}</span>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-[11px] font-extrabold">
+                                <i data-lucide="book-open" class="w-3 h-3 text-indigo-600"></i>
+                                ${escapeHtml(hw.ders || 'Genel')}
+                            </span>
+                            <div class="flex items-center gap-1 text-xs font-extrabold text-slate-700">
+                                <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-400"></i>
+                                <span>Son Teslim: ${escapeHtml(hw.sonTarih)}</span>
+                            </div>
                         </div>
                         <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full ${badgeStyle}">
                             ${badgeText}
@@ -320,7 +326,7 @@
                     </div>
                     <div class="text-xs sm:text-sm font-semibold text-slate-800 whitespace-pre-wrap leading-relaxed">${escapeHtml(hw.odev)}</div>
                     <div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] font-bold text-slate-400">
-                        <span>Eklenme: ${escapeHtml(hw.olusturmaTarihi || '-')}</span>
+                        <span>Veriliş Tarihi: ${escapeHtml(hw.olusturmaTarihi || '-')}</span>
                     </div>
                 `;
                 listEl.appendChild(card);
